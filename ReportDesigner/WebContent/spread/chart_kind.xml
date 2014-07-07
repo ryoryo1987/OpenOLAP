@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<Chart id='000' image='./images/chart.gif'>
+	<VerticalBar id='100' image='./images/chart/v_bar.gif'>棒<VerticalBar id='111' image='./images/chart/v_bar.gif' default='true'>縦棒
+			<Vertical3D_Bar id='112' image='./images/chart/v_3dBar.gif' default='false'>3D縦棒</Vertical3D_Bar>
+		</VerticalBar>
+		<HorizontalBar id='121' image='./images/chart/h_bar.gif' default='false'>横棒
+			<Horizontal3D_Bar id='122' image='./images/chart/h_3dBar.gif' default='false'>3D横棒</Horizontal3D_Bar>
+		</HorizontalBar>
+	</VerticalBar>
+
+	<Line id='200' image='./images/chart/line.gif' default='false'>線<MultiLine id='220' image='./images/chart/lines.gif' default='false'>複数メジャー線</MultiLine>
+	</Line>
+
+	<Pie id='300' image='./images/chart/circle.gif' default='false'>円<Pie id='310' image='./images/chart/circle.gif' default='false'>円
+			<Pie_3D id='320' image='./images/chart/3dcircle.gif' default='false'>3D円</Pie_3D>
+		</Pie>
+		<MultiPie id='330' image='./images/chart/circles.gif' default='false'>複数円</MultiPie>
+	</Pie>
+
+	<VerticalStackedBar id='400' image='./images/chart/v_stackedBar.gif' default='false'>積上<VerticalStackedBar id='115' image='./images/chart/v_stackedBar.gif' default='false'>積上縦棒
+			<VerticalStacked3D_Bar id='116' image='./images/chart/v_3dstackedBar.gif' default='false'>3D積上縦棒</VerticalStacked3D_Bar>
+		</VerticalStackedBar>
+		<HorizontalStackedBar id='420' image='./images/chart/h_stackedBar.gif' default='false'>積上横棒
+			<HorizontalStacked3D_Bar id='430' image='./images/chart/h_3dstackedBar.gif' default='false'>3D積上横棒</HorizontalStacked3D_Bar>
+		</HorizontalStackedBar>
+		<StackedArea id='450' image='./images/chart/areas.gif' default='false'>積上エリア</StackedArea>
+	</VerticalStackedBar>
+</Chart>

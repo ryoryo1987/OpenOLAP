@@ -1,0 +1,57 @@
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS" />
+<title><%=(String)session.getValue("aplName")%></title>
+<link type="text/css" rel="stylesheet" href="../../../css/common.css" />
+<link type="text/css" rel="stylesheet" href="../../../css/tree.css" />
+<script language="JavaScript1.2" src="js/dbtree.js"></script>
+</head>
+<script type="text/JavaScript1.2">
+	var xslData = new ActiveXObject("MSXML2.DOMDocument");
+	xslData.async = false;
+	xslData.load("mapping_db.xsl");
+
+	var xmlData = new ActiveXObject("MSXML2.DOMDocument");
+	xmlData.async = false;
+
+	function getDbXML(){
+		return xmlData;
+	}
+
+	function loadDbXML(modelId){
+		var a = xmlData.load("mapping_db.jsp?modelId="+modelId);
+//alert(xmlData.xml);
+//alert("mapping_db.jsp?modelId="+modelId);
+//alert(xslData.xml);
+
+		var strResult = xmlData.transformNode(xslData);
+		var treeObj = document.getElementById("treeObj");
+		treeObj.innerHTML = strResult;
+	}
+</script>
+<body style="margin-top:0px;margin-left:0px;padding-top:0px">
+<form name="navi_form" id="navi_form" target="navi_frm" method="post" action="">
+<input type="hidden" name="preClick" />
+<input type="hidden" name="child_record" value="" />
+<input type="hidden" name="parent_record" value="" />
+<input type="hidden" name="objKind" value="" />
+<input type="hidden" name="seqId" value="" />
+<input type="hidden" name="change_flg" value="0" />
+<input type="hidden" name="copyObj_objKind" value="" />
+<input type="hidden" name="copyObj_id" value="" />
+<input type="hidden" name="copyParentObj_objKind" value="" />
+<input type="hidden" name="copyParentObj_id" value="" />
+
+<table class="Header">
+	<tr>
+		<td class="HeaderTitleLeft"></td>
+		<td class="HeaderTitleCenter">使用可能な項目</td>
+	</tr>
+</table>
+
+<div id="treeObj" style="margin-left:7">
+</div>
+
+</form>
+</body>
+</html>

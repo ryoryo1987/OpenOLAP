@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml:stylesheet type="text/xsl" href="screen.xsl" ?>
+
+<screens id='0' folderName='RreportXML' name='画面一覧'>
+	<folder id='1000' folderName='table' name='表'>
+		<screen id='1100' fileName='xml/table/data.xml' xslfileName1='xml/table/simpleTable.xsl' xslfileName2='xml/table/rowDisp.xsl' name='単純表'>
+			<css id='110001' fileName='xml/table/spreadStyle_blue_1.css' name='ブルー1'></css>
+			<css id='110002' fileName='xml/table/spreadStyle_blue_2.css' name='ブルー2'></css>
+			<css id='110003' fileName='xml/table/spreadStyle_blue_3.css' name='ブルー3'></css>
+			<css id='110004' fileName='xml/table/spreadStyle_green_1.css' name='グリーン1'></css>
+			<css id='110005' fileName='xml/table/spreadStyle_green_2.css' name='グリーン2'></css>
+			<css id='110006' fileName='xml/table/spreadStyle_green_3.css' name='グリーン3'></css>
+			<css id='110007' fileName='xml/table/spreadStyle_orange_1.css' name='オレンジ1'></css>
+			<css id='110008' fileName='xml/table/spreadStyle_orange_2.css' name='オレンジ2'></css>
+			<css id='110009' fileName='xml/table/spreadStyle_orange_3.css' name='オレンジ3'></css>
+			<css id='110010' fileName='xml/table/spreadStyle_purple_1.css' name='紫1'></css>
+			<css id='110011' fileName='xml/table/spreadStyle_purple_2.css' name='紫2'></css>
+			<css id='110012' fileName='xml/table/spreadStyle_purple_3.css' name='紫3'></css>
+			<css id='110013' fileName='xml/table/spreadStyle_white_1.css' name='グレー1'></css>
+			<css id='110014' fileName='xml/table/spreadStyle_white_2.css' name='グレー2'></css>
+			<css id='110015' fileName='xml/table/spreadStyle_white_3.css' name='グレー3'></css>
+		</screen>
+		<screen id='1200' fileName='xml/table/data2.xml' xslfileName1='xml/table/repeatTable.xsl' xslfileName2='xml/table/rowDisp.xsl' name='繰り返し表'>
+			<css id='120001' fileName='xml/table/spreadStyle_blue_1.css' name='ブルー1'></css>
+			<css id='120002' fileName='xml/table/spreadStyle_blue_2.css' name='ブルー2'></css>
+			<css id='120003' fileName='xml/table/spreadStyle_blue_3.css' name='ブルー3'></css>
+			<css id='120004' fileName='xml/table/spreadStyle_green_1.css' name='グリーン1'></css>
+			<css id='120005' fileName='xml/table/spreadStyle_green_2.css' name='グリーン2'></css>
+			<css id='120006' fileName='xml/table/spreadStyle_green_3.css' name='グリーン3'></css>
+			<css id='120007' fileName='xml/table/spreadStyle_orange_1.css' name='オレンジ1'></css>
+			<css id='120008' fileName='xml/table/spreadStyle_orange_2.css' name='オレンジ2'></css>
+			<css id='120009' fileName='xml/table/spreadStyle_orange_3.css' name='オレンジ3'></css>
+			<css id='120010' fileName='xml/table/spreadStyle_purple_1.css' name='紫1'></css>
+			<css id='120011' fileName='xml/table/spreadStyle_purple_2.css' name='紫2'></css>
+			<css id='120012' fileName='xml/table/spreadStyle_purple_3.css' name='紫3'></css>
+			<css id='120013' fileName='xml/table/spreadStyle_white_1.css' name='グレー1'></css>
+			<css id='120014' fileName='xml/table/spreadStyle_white_2.css' name='グレー2'></css>
+			<css id='120015' fileName='xml/table/spreadStyle_white_3.css' name='グレー3'></css>
+		</screen>
+		<screen id='1300' fileName='xml/crossTable/data.xml' xslfileName1='xml/crossTable/crossTable.xsl' xslfileName2='xml/crossTable/spreadData.xsl' xslfileName3='xml/crossTable/rowDisp.xsl' name='クロスタブ表'>
+			<css id='130001' fileName='xml/crossTable/css/spreadStyle.css' name='標準'></css>
+			<css id='130002' fileName='xml/crossTable/css/spreadStyle_blue.css' name='ブルー'></css>
+			<css id='130003' fileName='xml/crossTable/css/spreadStyle_green.css' name='グリーン'></css>
+			<css id='130004' fileName='xml/crossTable/css/spreadStyle_orange.css' name='オレンジ'></css>			<css id='130005' fileName='xml/crossTable/css/spreadStyle_purple.css' name='紫'></css>
+			<css id='130006' fileName='xml/crossTable/css/spreadStyle_white.css' name='グレー'></css>		</screen>
+	</folder>
+
+	<folder id='5000' name='グラフ'>
+		<chart id='5100' fileName='xml/chart/data.xml' xslfileName1='xml/chart/simpleTable.xsl' xslfileName2='xml/chart/rowDisp.xsl' name='単純表・グラフ'>
+			<css id='110001' fileName='xml/table/spreadStyle_blue_1.css' name='ブルー1'></css>
+			<css id='110002' fileName='xml/table/spreadStyle_blue_2.css' name='ブルー2'></css>
+			<css id='110003' fileName='xml/table/spreadStyle_blue_3.css' name='ブルー3'></css>
+			<css id='110004' fileName='xml/table/spreadStyle_green_1.css' name='グリーン1'></css>
+			<css id='110005' fileName='xml/table/spreadStyle_green_2.css' name='グリーン2'></css>
+			<css id='110006' fileName='xml/table/spreadStyle_green_3.css' name='グリーン3'></css>
+			<css id='110007' fileName='xml/table/spreadStyle_orange_1.css' name='オレンジ1'></css>
+			<css id='110008' fileName='xml/table/spreadStyle_orange_2.css' name='オレンジ2'></css>
+			<css id='110009' fileName='xml/table/spreadStyle_orange_3.css' name='オレンジ3'></css>
+			<css id='110010' fileName='xml/table/spreadStyle_purple_1.css' name='紫1'></css>
+			<css id='110011' fileName='xml/table/spreadStyle_purple_2.css' name='紫2'></css>
+			<css id='110012' fileName='xml/table/spreadStyle_purple_3.css' name='紫3'></css>
+			<css id='110013' fileName='xml/table/spreadStyle_white_1.css' name='グレー1'></css>
+			<css id='110014' fileName='xml/table/spreadStyle_white_2.css' name='グレー2'></css>
+			<css id='110015' fileName='xml/table/spreadStyle_white_3.css' name='グレー3'></css>
+		</chart>
+	</folder>
+
+
+	<folder id='7000' name='図'>
+		<relation id='7100' name='関連図'  fileName='xml/other/data.xml' xslfileName1='xml/other/relation.xsl'>
+			<css id='710001' fileName='xml/other/common.css' name='共通'></css>
+		</relation>
+	</folder>
+
+	<folder2 id='6000' name='条件設定'>
+		<condition id='6100' fileName='xml/condition/data.xml' xslfileName1='xml/condition/condition.xsl' name='条件設定'>
+			<css id='610001' fileName='xml/condition/spreadStyle_blue_1.css' name='ブルー'></css>
+			<css id='610002' fileName='xml/condition/spreadStyle_green_1.css' name='グリーン'></css>
+			<css id='610003' fileName='xml/condition/spreadStyle_orange_1.css' name='オレンジ'></css>
+		</condition>
+	</folder2>
+
+</screens>
+
+

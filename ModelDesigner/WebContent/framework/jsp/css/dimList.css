@@ -1,0 +1,99 @@
+div.dimListBar,
+div.dimListBar a.dimListButton,
+div.dimList,
+div.dimList a.dimListItem {
+  font-family: "MS Sans Serif", Arial, sans-serif;
+  font-size: 8pt;
+  font-style: normal;
+  font-weight: normal;
+  color: black;
+}
+
+div.dragNode {
+  display:none;
+  position:absolute;
+}
+
+div.dimName {
+  display:inline;
+  font-family: "MS Sans Serif", Arial, sans-serif;
+  font-size: 8pt;
+  font-style: normal;
+  font-weight: normal;
+  color: black;
+}
+
+div.dimListBar {
+  background-color: #F7F7F7;
+  border: 1px solid;
+  border-color: #F7F7F7;
+  padding: 2px;
+  text-align: left;
+}
+
+div.dimListBar a.dimListButton {
+  border: 1px solid #F7F7F7;
+  cursor: default;
+  left: 0px;
+  margin: 1px;
+  padding: 2px 4px 2px 4px;
+  position: relative;
+  text-decoration: none;
+  top: 0px;
+  z-index: 100;
+}
+
+div.dimListBar a.dimListButton:hover {
+  background-color: transparent;
+  border-color: #42657B;
+}
+
+div.dimListBar a.dimListButtonActive,
+div.dimListBar a.dimListButtonActive:hover {
+  background-color: #F7F7F7;
+  border-color: #42657B;
+  left: 1px;
+  top: 1px;
+}
+
+div.dimList {
+  background-color: #F7F7F7;
+  border: 1px solid #42657B;
+  left: 0px;
+  padding: 0px 1px 1px 0px;
+  position: absolute;
+  top: 0px;
+  visibility: hidden;
+  overflow-y: auto;
+  z-index: 101;
+}
+
+div.dimList a.dimListItem {
+  color: #000000;
+  cursor: default;
+  display: block;
+  padding: 3px 1em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+div.dimList a.dimListItem:hover, div.dimList a.dimListItemHighlight {
+  background-color: #D6DFE7;
+}
+
+div.dimList a.dimListItem span.textObject {
+  font-weight: normal;
+}
+
+div.dimList a.dimListItem span.dimListBoldItemText {
+  font-weight: bold;
+}
+
+div.dimList a.dimListItem span.arrowObject {
+  margin-right: -.75em;
+}
+
+div.dimList div.dimListItemSep {
+  border-bottom: 1px solid #8CA6B5;
+  margin: 4px 2px;
+}

@@ -1,0 +1,47 @@
+/*　表項目　*/
+.con_title {
+	display:inline;
+	text-align : left;
+	background-color : #C6EF97;
+	color : black;
+	border : 1 solid #ABC191;
+	padding-top:4px;
+	padding-left:5px;
+	padding-right:5px;
+	margin-right:2;
+	white-space: nowrap;
+	height:22;
+
+}
+
+/*　表データ（左揃え）　*/
+.con_data {
+	display:inline;
+	text-aliign : left;
+	background-color : #EBF9DC;
+	color : black;
+	border : 1 solid #BABABA;
+	padding : 1px;
+	white-space: nowrap;
+	margin-bottom:1;
+	height:22;
+}
+
+
+/* 検索ボタン */
+input.normal_search, input.up_search, input.out_search {
+	width : 68;
+	height : 38;
+	background : url("search_green.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_search, input.down_search {
+	width : 68;
+	height : 38;
+	background : url("search_green_r.gif") no-repeat;
+	border-style : none;
+}
+
+
+

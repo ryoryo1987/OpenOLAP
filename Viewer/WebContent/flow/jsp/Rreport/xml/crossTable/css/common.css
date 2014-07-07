@@ -1,0 +1,48 @@
+/******************************************************************
+ システム名	：OpenOLAP Viewer
+ ファイル名	：common.css
+ 作成		：
+ 修正履歴	：----/--/--
+ 備考		：共通のスタイルシート
+			　（body、文字列など）
+******************************************************************/
+
+/********************* BODY *********************/
+body 
+{ 
+	background-color : white;
+	margin : 0;
+}
+
+/********************* 文字関連 *********************/
+/* 文字共通 */
+body,tr,th,td,select,input,textarea 
+{
+	font-family : 'MS UI Gothic', serif;
+	font-weight : normal;
+	font-size : 12px;
+	color : black;
+}
+
+/********************* img ***************************/
+img 
+{
+	border-style : none;
+	margin:0;
+}
+
+/********************* 各機能トップ画面 *********************/
+
+/* 説明文章の段落*/
+p {
+	width : 100%;
+	text-align : left;
+	line-height : 1.2em;
+	text-indent : 1em;
+	margin : 20px;
+}
+
+ul {
+	text-align : left;
+}
+

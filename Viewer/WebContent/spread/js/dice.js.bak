@@ -1,0 +1,686 @@
+// *********************************************************
+//  ダイス 処理
+// *********************************************************
+
+	// *********************************************************
+	//  変数宣言部
+	// *********************************************************
+	var colEdgeComboMax = 500;	// 列に配置できる次元/メジャーの各段のメンバの積の最大値
+	var rowEdgeComboMax = 2000;	// 行に配置できる次元/メジャーの各段のメンバの積の最大値
+	var spreadComboMax = 20000;	// Spread上に配置できる行・列の次元/メジャーの各段のメンバの積の最大値
+
+	// dragColor:軸タイトルが、入れ替え/挿入可能な位置にある場合につく色
+	// 			 css/colorStyle.jsで設定
+	// defaultAxisTitleColor:軸タイトルセルのデフォルト色
+	//			 			 css/colorStyle.jsで設定
+
+//	var dragLineWidth="3px";	// 次元挿入位置で表示する罫線の太さ
+	var sourceTd="";			// ドラッグ元の軸タイトルを表すTDオブジェクト
+	var sourceDim="";			// ドラッグ元のエッジ（0:COL,1:ROW,2:PAGE）
+	var sourceNum="";			// ドラッグ元のエッジ内の軸のIndex(=hieIndex)
+	var targetDim="";			// ドラッグ先のエッジ（0:COL,1:ROW,2:PAGE）
+	var targetNum="";			// ドラッグ元のエッジ内の軸のIndex(=hieIndex)
+	var diceType="";			// ダイスのタイプ（入れ替え or 挿入）
+
+	var dragableObj = null;		// ドラッグ中にマウスポインタの後を追うオブジェクトを格納
+	var axisTitleDepth = 5; 	// 軸タイトルセルの階層の深さの最大値
+
+	// *********************************************************
+	//  イベント関数
+	// *********************************************************
+
+	// ドラッグを行なうオブジェクトを、マウスポインタよりどれだけ右に表示するか。
+	var dragObjDeltaX = 10;
+
+	// ドラッグスタート
+	function axisTitleDown(obj) {
+
+		//右クリックの場合はドラッグモードを終了
+		if(event.button==2) {
+			return;
+		}
+
+		//クロスヘッダ部の、幅変更可能エリアの場合はドラッグモードを終了
+		if (onCrossHeaderCellVLine(event)) {
+			return;
+		}
+
+		//移動元オブジェクト(TD)を取得
+		sourceTd = obj.parentNode.parentNode.parentNode;
+
+		//ドラッグ時についてくるイメージオブジェクト(DIV)を表示
+		dragableObj               = document.all("dragNode");
+		dragableObj.style.left    = event.clientX + dragObjDeltaX;
+		dragableObj.style.top     = event.clientY;
+		dragableObj.firstChild.nextSibling.innerText = sourceTd.firstChild.firstChild.firstChild.nextSibling.innerText;
+		dragableObj.style.display = "inline";
+		dragableObj.dispName      = sourceTd.firstChild.firstChild.firstChild.nextSibling.innerText; // 表示用の名称
+
+		// イベントの付与
+		document.attachEvent( "onmousemove", dragAxis );	// ドラッグイベント
+		document.attachEvent( "onmouseup", dragStatusClear ); // ドラッグ状態のクリアイベント
+	}
+
+	// 軸のドラッグ
+	function dragAxis() {
+		if ( dragableObj == null ) { return; }
+
+		// ドラッグに合わせて次元/メジャーアイコンと名称を移動する
+		dragableObj.style.left    = event.clientX + dragObjDeltaX;
+		dragableObj.style.top     = event.clientY;
+
+		// 軸タイトルセルのスタイルを変更
+		var axisTitleCell = getAxisTitleCell(window.event.srcElement);
+		if ( axisTitleCell != null ) {
+			adjustAxisNameCellStyle(axisTitleCell);
+		} else {
+			// null の場合は軸タイトルセル上にマウスが無いため何もしない
+			backDraggableToDefaultStyle(dragableObj);	// ドラッグオブジェクトのスタイルを元に戻す
+		}
+
+	}
+
+	// ダイス処理実行
+	function axisTitleUp(targetTd) {
+		if ( sourceTd == "" ) { return; }
+		if ( sourceTd == targetTd ) { return; }
+
+		sourceDim=sourceTd.dragtype;
+		sourceNum=sourceTd.cellIndex;
+		targetDim=targetTd.dragtype;
+		targetNum=targetTd.cellIndex;
+
+		if ( targetTd.id == "insertArea" ) {	// PageEdgeに次元が未設定で、target=PageEdgeの場合
+			diceType="insert";
+		} else {
+			//移動先をセルの３分割計算により調整
+			if(cellCheck(targetTd)=="1"){
+				diceType="insert";
+			}else if(cellCheck(targetTd)=="2"){
+				diceType="replace";
+			}else if(cellCheck(targetTd)=="3"){
+				targetNum=targetNum+1;
+				diceType="insert";
+			}
+		}
+
+		//その結果、移動先が移動元と同じであればreturn;
+		if(((sourceDim==targetDim)&&(sourceNum==targetNum)) || ((sourceDim=="2")&&(targetDim=="2"))){
+			return;
+		}
+
+		// ＝＝＝＝＝ XML更新処理 ＝＝＝＝＝
+		// 初期設定
+		var sourceDimName;
+		var targetDimName;
+			if ( sourceDim == "0" ) {
+				sourceDimName = "COL";
+			} else if ( sourceDim == "1" ) {
+				sourceDimName = "ROW";
+			} else if ( sourceDim == "2" ) {
+				sourceDimName = "PAGE";
+			}
+			if ( targetDim == "0" ) {
+				targetDimName = "COL";
+			} else if ( targetDim == "1" ) {
+				targetDimName = "ROW";
+			} else if ( targetDim == "2" ) {
+				targetDimName = "PAGE";
+			}
+
+		// ===== 入れ替え・挿入条件の判定 =====
+		var colEdgeNode  = axesXMLData.selectSingleNode("/root/OlapInfo/AxesInfo/COL");
+		var rowEdgeNode  = axesXMLData.selectSingleNode("/root/OlapInfo/AxesInfo/ROW");
+		var pageEdgeNode = axesXMLData.selectSingleNode("/root/OlapInfo/AxesInfo/PAGE");
+		var colNodes  = colEdgeNode.selectNodes("./HierarchyID");
+		var rowNodes  = rowEdgeNode.selectNodes("./HierarchyID");
+		var pageNodes = pageEdgeNode.selectNodes("./HierarchyID");
+
+		var sourceNodes;
+		var targetNodes;
+			if ( sourceDimName == "COL" ) {
+				sourceNodes = colNodes;
+			} else if ( sourceDimName == "ROW" ) {
+				sourceNodes = rowNodes;
+			} else if ( sourceDimName == "PAGE" ) {
+				sourceNodes = pageNodes;
+			}
+
+			if ( targetDimName == "COL" ) {
+				targetNodes = colNodes;
+			} else if ( targetDimName == "ROW" ) {
+				targetNodes = rowNodes;
+			} else if ( targetDimName == "PAGE" ) {
+				targetNodes = pageNodes;
+			}
+
+		var checkFLG = isDragOK( diceType, sourceDimName, sourceNum, sourceNodes, targetDimName, targetNum,targetNodes, colNodes, rowNodes );
+
+		if ( checkFLG == false ) {
+			return;
+		}
+
+		// ===== 次元入れ替え/挿入処理 =====
+
+		var sourceEdgeNode;	// 移動元のエッジのＸＭＬノード
+		var targetEdgeNode;	// 移動先のエッジのＸＭＬノード
+			if ( sourceDimName == "COL" ) {
+				sourceEdgeNode = colEdgeNode;
+			} else if ( sourceDimName == "ROW" ) {
+				sourceEdgeNode = rowEdgeNode;
+			} else if ( sourceDimName == "PAGE" ) {
+				sourceEdgeNode = pageEdgeNode;
+			}
+			if ( targetDimName == "COL" ) {
+				targetEdgeNode = colEdgeNode;
+			} else if ( targetDimName == "ROW" ) {
+				targetEdgeNode = rowEdgeNode;
+			} else if ( targetDimName == "PAGE" ) {
+				targetEdgeNode = pageEdgeNode;
+			}
+
+		var sourceNode = sourceNodes[sourceNum];	// 移動元の次元/メジャーのＸＭＬノード
+		var targetNode = targetNodes[targetNum];	// 移動先の次元/メジャーのＸＭＬノード
+
+		if ( diceType == "replace" ) {	// 次元入れ替えの場合
+
+			var sourceNextNode = sourceNodes[sourceNum+1];
+			targetEdgeNode.replaceChild( sourceNode, targetNode );
+
+			if ( sourceNextNode == null ) {	// ドラッグ元が最終段
+				sourceEdgeNode.appendChild( targetNode );
+			} else {
+				if ( targetNode.childNodes[0].text == sourceNextNode.childNodes[0].text) {
+					// 挿入場所を、入れ替え後のXMLの状態から取得するため、再度取得する
+					var insertNode = axesXMLData.selectSingleNode("/root/OlapInfo/AxesInfo/"+ sourceDimName +"/HierarchyID[" + (sourceNum+1) + "]");
+					sourceEdgeNode.insertBefore( targetNode, insertNode );
+				}
+				sourceEdgeNode.insertBefore( targetNode, sourceNextNode );
+			}
+
+		} else if ( diceType == "insert" ) {	// 次元挿入の場合
+			if ( targetNode == null ) {	// target軸の最後へ追加 or 
+										// ページエッジに次元が無い場合のページエッジへの追加
+				targetEdgeNode.appendChild( sourceNode );
+			} else {
+				targetEdgeNode.insertBefore( sourceNode, targetNode );
+			}
+		}
+
+		// ＝＝＝＝＝ サーバー側のSpread情報更新＆再表示 ＝＝＝＝＝
+
+		// GIFイメージを動かす（サーバーへのアクセス中を示す）
+//		parent.display_area.setLoadingStatus(true);
+
+		// 軸の配置情報
+		var colAxisListString  = getAxisIdListInEdge( "COL", axesXMLData );
+		var rowAxisListString  = getAxisIdListInEdge( "ROW", axesXMLData );
+		var pageAxisListString = getAxisIdListInEdge( "PAGE", axesXMLData );
+		document.SpreadForm.colItems.value  = colAxisListString;
+		document.SpreadForm.rowItems.value  = rowAxisListString;
+		document.SpreadForm.pageItems.value = pageAxisListString;
+
+		// 色情報を取得
+		var colorInfoArray = getColorArray();
+		if( colorInfoArray != null ) {
+			document.SpreadForm.hdrColorInfo.value = colorInfoArray[0];	// ヘッダー部の色情報
+			document.SpreadForm.dtColorInfo.value  = colorInfoArray[1];	// データテーブルの色情報
+		}
+
+		// サーバーへ送信・再表示処理呼び出し
+		document.SpreadForm.action='Controller?action=renewHtmlAct&mode=registColorSetings';
+		document.SpreadForm.target='display_area';
+		document.SpreadForm.submit();
+	}
+
+
+	// 軸タイトルセルからマウスが出た
+	function axisTitleOut(tdObj) {
+		backDraggableToDefaultStyle(dragableObj);
+//		cellClear(tdObj);	// セルのスタイルをクリア
+	}
+
+	// *********************************************************
+	//  スタイル関数（設定）
+	// *********************************************************
+
+	// ドラッグしているオブジェクトのスタイルを変更
+	function adjustAxisNameCellStyle(targetTd) {
+		if ( sourceTd == targetTd ) { // 移動元と移動先が同じセルの場合、無効
+			backDraggableToDefaultStyle(dragableObj);
+			return; 
+		}
+
+		if ( ( sourceTd.parentNode.parentNode.parentNode.id == "pageEdgeTable" ) && 
+	         ( targetTd.parentNode.parentNode.parentNode.id == "pageEdgeTable" )
+	       ) { 
+			backDraggableToDefaultStyle(dragableObj);
+			return; 
+		}
+
+		if ( targetTd.id == "insertArea" ) {	
+		// ページエッジの挿入用エリアへ次元/メジャーを挿入
+		// ※ページエッジの挿入用エリア：ページエッジに次元/メジャーが配置されていない場合に表示
+
+			changeDraggableToInsertStyle(dragableObj);
+
+//			if ( dragableObj.firstChild.className != 'insertIMG' ) {
+//				dragableObj.firstChild.removeAttribute("class");
+//				dragableObj.firstChild.className = 'insertIMG';
+//			}
+
+//			targetTd.style.backgroundColor=dragColor;
+//			targetTd.firstChild.firstChild.firstChild.nextSibling.style.backgroundColor=dragColor;
+		} else {
+
+//			if (dragableObj.firstChild.className != 'replaceIMG') {
+//				dragableObj.firstChild.removeAttribute("class");
+//				dragableObj.firstChild.className = 'replaceIMG';
+//			}
+
+
+			if(cellCheck(targetTd)=="1") {
+				changeDraggableToInsertStyle(dragableObj);
+/*
+				if ( targetTd.dragtype != "2" ) {	// ドラッグ先が行か列
+					targetTd.style.padding="0px "+dragLineWidth+" 0px 0px";
+					targetTd.style.borderLeftWidth=dragLineWidth;
+				}
+				targetTd.style.borderLeftColor=dragColor;
+*/
+			}else if( ( cellCheck(targetTd)=="2" ) ){
+				changeDraggableToReplaceStyle(dragableObj, targetTd);
+/*
+				if ( targetTd.dragtype == "2" ) {	// ドラッグ先がページ
+					targetTd.style.borderColor=dragColor;
+				}
+				targetTd.style.backgroundColor=dragColor;
+				targetTd.firstChild.firstChild.firstChild.nextSibling.style.backgroundColor=dragColor;
+*/
+			}else if(cellCheck(targetTd)=="3"){
+				changeDraggableToInsertStyle(dragableObj);
+/*
+				if ( targetTd.dragtype != "2" ) {	// ドラッグ先が行か列
+					targetTd.style.padding="0px 0px 0px "+dragLineWidth;
+					targetTd.style.borderRightWidth=dragLineWidth;
+				}
+				targetTd.style.borderRightColor=dragColor;
+*/
+			}
+
+		}
+
+	}
+
+
+	// ドラッグしているオブジェクトのスタイルをデフォルトに変更
+	function backDraggableToDefaultStyle(dragableNode) {
+		if ( dragableNode == null ) { return; }
+		if ( dragableNode.firstChild.className != 'dragAxisIMG' ) {
+			dragableNode.firstChild.removeAttribute("class");
+			dragableNode.firstChild.className = 'dragAxisIMG';
+
+			dragableNode.firstChild.nextSibling.removeAttribute("class");
+			dragableNode.firstChild.nextSibling.className = 'dragAxisCenter';
+
+			dragableNode.firstChild.nextSibling.innerText = dragableNode.dispName;
+
+			dragableNode.firstChild.nextSibling.nextSibling.style.display = "inline";
+
+		}
+	}
+
+	// ドラッグしているオブジェクトのスタイルを挿入モードに変更
+	function changeDraggableToInsertStyle(dragableNode) {
+		if ( dragableNode == null ) { return; }
+		if ( dragableNode.firstChild.className != 'insertIMG' ) {
+
+			var sourceDimName = getAxisName(sourceTd);	// 置換元のディメンション名
+
+			dragableNode.firstChild.removeAttribute("class");
+			dragableNode.firstChild.className = 'insertIMG';
+
+			dragableNode.firstChild.nextSibling.removeAttribute("class");
+			dragableNode.firstChild.nextSibling.className = 'insertDimName';
+
+			dragableNode.firstChild.nextSibling.innerHTML = "<span style='font-weight:bold'>" + sourceDimName + "</span> を挿入";
+
+			dragableNode.firstChild.nextSibling.nextSibling.style.display = "none";
+
+		}
+	}
+
+	// ドラッグしているオブジェクトのスタイルを置換モードに変更
+	function changeDraggableToReplaceStyle(dragableNode, targetTd) {
+		if ( dragableNode == null ) { return; }
+		if ( dragableNode.firstChild.className != 'replaceIMG' ) {
+
+			var targetDimName = getAxisName(targetTd);	// 置換先のディメンション名
+			var sourceDimName = getAxisName(sourceTd);	// 置換元のディメンション名
+
+			dragableNode.firstChild.removeAttribute("class");
+			dragableNode.firstChild.className = 'replaceIMG';
+
+			dragableNode.firstChild.nextSibling.removeAttribute("class");
+			dragableNode.firstChild.nextSibling.className = 'replaceDimName';
+			dragableNode.firstChild.nextSibling.innerHTML = "<span style='font-weight:bold'>" + sourceDimName + "</span> と<br><span style='font-weight:bold'>" + targetDimName + "</span> を入れ替え";
+
+			dragableNode.firstChild.nextSibling.nextSibling.style.display = "none";
+
+		}
+	}
+
+	// 軸名を取得する（メジャーの場合は、「メジャー」となる）
+	// 	input  node     軸タイトル部および、スライサーボタンを表すTDオブジェクト
+	// 	return axisName 軸を表す名称
+	function getAxisName(node) {
+		var axisName = null;
+			if (node.dragtype == "2") { // nodeがページエッジ
+				axisName = node.title;
+			} else if ( (node.dragtype == "0") || (node.dragtype == "1") ) { // nodeが行エッジ、列エッジ
+				axisName = node.firstChild.firstChild.firstChild.nextSibling.innerText;
+			}
+
+		return axisName;
+	}
+
+	// *********************************************************
+	//  スタイル関数（クリア）
+	// *********************************************************
+
+	// ドラッグ状態をクリア
+	function clearDragStatus() {
+
+		//ドラッグ時についてくるイメージオブジェクト(DIV)を消去
+		if(dragableObj!=null){
+			dragableObj.style.display = "none";
+			dragableObj = null;
+		}
+		// イベントを削除
+		document.detachEvent( "onmousemove", dragAxis );
+		document.detachEvent( "onmouseup", dragStatusClear );
+
+	}
+
+//	//セルのスタイル（わきの線幅・セル色）をクリア
+//	function cellClear(tdObj){
+//
+//		if ( tdObj.dragtype != "2" ) {	// ドラッグ先が行か列
+//			tdObj.style.borderLeftWidth  = "0";
+//			tdObj.style.borderRightWidth = "0";
+//			tdObj.style.padding = "0px "+dragLineWidth+" 0px "+dragLineWidth;
+//			tdObj.style.borderLeftColor  = defaultAxisTitleColor;
+//			tdObj.style.borderRightColor = defaultAxisTitleColor;
+//		} else {
+//			tdObj.style.borderColor  = defaultAxisTitleColor;
+//		}
+//
+//		tdObj.style.backgroundColor  = defaultAxisTitleColor;
+//		tdObj.firstChild.firstChild.firstChild.nextSibling.style.backgroundColor = defaultAxisTitleColor;
+//	}
+
+	function dragStatusClear() {//初期化
+		sourceTdClear();
+		clearDragStatus();
+	}
+
+	function sourceTdClear(){
+		sourceTd="";	// TDの初期化
+	}
+
+	// *********************************************************
+	//  位置取得関数
+	// *********************************************************
+
+	// 軸タイトルセル内のメンバであれば、軸タイトルセルを求める
+	function getAxisTitleCell( node ) {
+
+		if (node == null) { return null; }
+		if ( (node.tagName != "DIV") && (node.tagName != "A") && (node.tagName != "NOBR") && (node.tagName != "TD") ) { return null; }
+
+		// 軸タイトルセルの階層の深さの分だけ上に辿って軸タイトルセルを探す
+		for ( var i = 0; i < axisTitleDepth; i++ ) { 
+			if (node == null) {
+				break;
+			}
+
+			if (node.axisTitle == "1") {//軸タイトルセル内のメンバであった
+				return node; //軸タイトルセルを返す
+			}
+
+			node = node.parentNode;
+		}
+
+		return null;
+	}
+
+
+	//セルを三分割にして何番目にマウスポインタがあるかを返す（引数：TDエレメント、戻り値：番号）
+	function cellCheck(tdObj) {
+/*
+alert(tdObj.outerHTML + "\n\n" + event.srcElement.tagName + "\n" 
+      + "pageX:" + event.pageX + "\n" 
+      + "screenX:" + event.screenX + "\n" 
+      + "event.offsetX:" + event.offsetX + "\n" 
+      + "event.srcElement.clientLeft:" + event.srcElement.clientLeft + "\n" 
+      + "event.srcElement.offsetLeft:" + event.srcElement.offsetLeft + "\n" 
+      + "event.srcElement.scrollLeft:" + event.srcElement.scrollLeft + "\n" 
+      + "tdObj.clientLeft:" + tdObj.clientLeft + "\n" 
+      + "tdObj.clientWidth:" + tdObj.clientWidth + "\n" 
+      + "tdObj.offsetWidth:" + tdObj.offsetWidth
+);
+*/
+
+//	var startObj = tdObj.firstChild.firstChild.firstChild;
+
+		// マウスポインタのセル内でのX座標を取得
+		var x = getAxisTitleX(tdObj, event);
+
+			// X座標の補正を行なう
+//			if (tdObj.dragtype == "0") {				// 列ヘッダの軸名表示セル
+//				if ( event.srcElement.id == "axisCenter" ) {
+//					x += startObj.clientWidth;
+//				} else if ( event.srcElement.id == "axisRight" ) {
+//					x += startObj.clientWidth + startObj.nextSibling.clientWidth;
+//				}
+//			} else if (tdObj.dragtype == "1") {			// 行ヘッダの軸名表示セル
+//				if ( event.srcElement.id == "axisCenter" ) {
+//					x += startObj.clientWidth;
+//				}
+//			} else if (tdObj.dragtype == "2") {			// ページエッジのスライサーボタン
+//				if ( event.srcElement.tagName == "A" ) { // ページエッジかつ、リンカでイベント発生
+//					x += startObj.clientWidth;
+//				}
+//			}
+
+/*
+alert(
+        tdObj.outerHTML + "\n\n"
+      + "event.srcElement.outerHTML:" + event.srcElement.outerHTML + "\n" 
+      + "x:" + x + "\n"
+      + "startObj.clientWidth:" + startObj.clientWidth + "\n"
+      + "startObj.nextSibling.clientWidth:" + startObj.nextSibling.clientWidth + "\n"
+      + "startObj.nextSibling.nextSibling.clientWidth:" + startObj.nextSibling.nextSibling.clientWidth + "\n"
+      + "tdObj.clientWidth:" + tdObj.clientWidth + "\n"
+      + "tdObj.offsetWidth:" + tdObj.offsetWidth + "\n"
+);
+*/
+
+		if(x<=tdObj.offsetWidth*0.2){
+			return "1";
+		}else if(x<=tdObj.offsetWidth*0.8){
+			return "2";
+		}else{
+			return "3";
+		}
+	}
+
+	// *********************************************************
+	//  その他関数
+	// *********************************************************
+
+	// イベントが発生した軸名表示TDオブジェクト内における、X座標を求める。
+	//		obj：イベントが発生した軸名表示TDオブジェクト
+	//		e: イベント
+	function getAxisTitleX(obj, e) {
+
+		var tdObj = obj;
+		var startObj = tdObj.firstChild.firstChild.firstChild;
+		var event = e;
+
+		var newX = e.offsetX;
+
+		// X座標の補正を行なう
+		if (tdObj.dragtype == "0") {				// 列ヘッダの軸名表示セル
+			if ( event.srcElement.id == "axisCenter" ) {
+				newX += startObj.clientWidth;
+			} else if ( event.srcElement.id == "axisRight" ) {
+				newX += startObj.clientWidth + startObj.nextSibling.clientWidth;
+			}
+		} else if (tdObj.dragtype == "1") {			// 行ヘッダの軸名表示セル
+			if ( event.srcElement.id == "axisCenter" ) {
+				newX += startObj.clientWidth;
+			}
+		} else if (tdObj.dragtype == "2") {			// ページエッジのスライサーボタン
+			if ( event.srcElement.tagName == "A" ) { // ページエッジかつ、リンカでイベント発生
+				newX += startObj.clientWidth;
+			}
+		}
+
+		return newX;
+
+	}
+
+	// ドラッグ可否を判断する
+	function isDragOK ( diceType, sourceDimName, sourceNum, sourceNodes, targetDimName, targetNum,targetNodes, colNodes, rowNodes ) {
+
+
+		// 次元の挿入を行なっても、行または列の段数が0にならないか？
+		if ( ( diceType == "insert" ) && 
+	         ( sourceDimName == "COL" || sourceDimName == "ROW" ) &&
+	         ( sourceNodes.length == 1 ) ) {
+			showMessage( "1", sourceDimName );
+			return false;
+		}
+
+		// 次元の挿入を行なっても、行または列の段数が4以上にならないか？
+		if ( ( diceType == "insert" ) && 
+	         ( targetDimName == "COL" || targetDimName == "ROW" ) &&
+	         ( targetNodes.length == 3 ) ) {
+			showMessage( "2", targetDimName );
+			return false;
+		}
+
+		// 次元の入れ替え・挿入後のデータテーブルの行または列の数が
+		// 規定値(colEdgeComboMax or rowEdgeComboMax)以内か
+
+		// 行または列の数が変化しうる場合
+		if ( ( targetDimName == "COL" || targetDimName == "ROW" ) &&
+		     ( sourceDimName != targetDimName ) ) {
+
+			var edgeComboNum = 1;
+			var edgeID    = 0;
+			var tmpMemNum = 0;
+
+			// 移動先のエッジの各段の次元/メジャーメンバ数の積を求める
+			for ( var i = 0; i < targetNodes.length; i++ ) {
+				// 次元IDを取得
+				edgeID = targetNodes[i].text;
+
+				// 次元入れ替え時には入れ替え対象次元/メジャーをスキップ
+				if ( ( diceType == "replace" ) && 
+				     ( targetNum  == i ) ) {
+					continue;
+				}
+
+				// 組み合わせ数を取得
+				tmpMemNum = parseInt( document.all("dimNumbers").all(edgeID).innerText );
+				edgeComboNum = edgeComboNum * tmpMemNum;
+			}
+
+			// さらに移動元の次元/メジャーのメンバ数を乗算する
+			edgeID = sourceNodes[sourceNum].text;	// 次元ID
+			tmpMemNum = parseInt( document.all("dimNumbers").all(edgeID).innerText );
+			edgeComboNum = edgeComboNum * tmpMemNum;
+
+			// 上限を超えていないか
+
+			if ( targetDimName == "COL" ) {
+				if ( edgeComboNum > colEdgeComboMax ) {
+					showMessage( "3", colEdgeComboMax, targetDimName );
+					return false;
+				}
+			} else if ( targetDimName == "ROW" ) {
+				if ( edgeComboNum > rowEdgeComboMax ) {
+					showMessage( "3", rowEdgeComboMax, targetDimName );
+					return false;
+				}
+			}
+		}
+
+		// データテーブルのセル数（行と列の各段のメンバ合計の積）が
+		// 規定値(spreadComboMax)以内か
+
+		// データテーブルセル数が変化しうる場合
+		if ( ( sourceDimName == "PAGE" ) && 
+		     ( targetDimName == "COL" || targetDimName == "ROW" ) ) {
+
+			var spreadComboNum = 1;
+
+			// 列エッジの計算
+			for ( var i = 0; i < colNodes.length; i++ ) {
+				// 次元IDを取得
+				edgeID = colNodes[i].text;
+
+				// ページエッジからの次元入れ替え時：入れ替え対象次元/メジャーをスキップ
+				if ( ( sourceDimName == "PAGE" ) &&
+				     ( targetDimName == "COL"  ) &&
+				     ( diceType == "replace" ) &&
+				     ( targetNum  == i ) ) {
+					continue;
+				}
+
+				// 組み合わせ数を取得
+				tmpMemNum = parseInt( document.all("dimNumbers").all(edgeID).innerText );
+				spreadComboNum = spreadComboNum * tmpMemNum;
+			}
+
+			// 行エッジの計算(列エッジの計算結果に対して乗算)
+			for ( var i = 0; i < rowNodes.length; i++ ) {
+				// 次元IDを取得
+				edgeID = rowNodes[i].text;
+
+				// ページエッジからの次元入れ替え時：入れ替え対象次元/メジャーをスキップ
+				if ( ( sourceDimName == "PAGE" ) &&
+				     ( targetDimName == "ROW" ) &&
+				     ( diceType == "replace" ) && 
+				     ( targetNum  == i ) ) {
+					continue;
+				}
+
+				// 組み合わせ数を取得
+				tmpMemNum = parseInt( document.all("dimNumbers").all(edgeID).innerText );
+				spreadComboNum = spreadComboNum * tmpMemNum;
+			}
+
+			// 移動元がページエッジ：さらに移動元の次元/メジャーのメンバ数を乗算する
+			if ( sourceDimName == "PAGE" ) {
+				edgeID = sourceNodes[sourceNum].text;	// 次元ID
+				tmpMemNum = parseInt( document.all("dimNumbers").all(edgeID).innerText );
+				spreadComboNum = spreadComboNum * tmpMemNum;
+			}
+
+			// 上限を超えていないか
+			if ( ( targetDimName == "COL" || targetDimName == "ROW" ) &&
+		         ( spreadComboNum > spreadComboMax ) ) {
+
+				showMessage( "4", spreadComboMax );
+				return false;
+			}
+
+		}
+
+		return true;
+	}
+
+

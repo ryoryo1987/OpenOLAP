@@ -1,0 +1,177 @@
+/******************  BODY  **********************/
+BODY.SpreadBody {
+	OVERFLOW: hidden;
+	POSITION: absolute; 
+	TOP: 0px; 
+	LEFT: 0px;
+}
+
+/******************  SPAN  **********************/
+SPAN.CrossHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 80px;
+}
+
+SPAN.ColumnHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 750px;
+}
+
+SPAN.RowHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 80px;
+}
+
+/******************　　DIV　　 ******************/
+
+DIV.DataTableArea {
+	OVERFLOW: auto;
+	HEIGHT: 400px;
+	WIDTH:600px;
+	POSITION: absolute
+}
+
+DIV.CH_TITLE {
+	display:inline;
+	font-weight:normal;
+	color:black;
+}
+
+DIV.chartAreaDIV {
+	display:none;
+	position:absolute;
+	top:50px;
+	left:0px;
+	top:50px;
+	left:0px;
+}
+
+/******************　　TABLE　　******************/
+
+TABLE.SpreadTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE.CrossHeaderTable {
+	TABLE-LAYOUT: fixed;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+
+TABLE.ColumnHeaderTable {
+	TABLE-LAYOUT: fixed;
+}
+
+/* 列ヘッダの軸名表示部 */
+TABLE.CH_TITLE_TABLE{
+	background-color:#F4F4FF;
+/*	border:1 solid gray; */
+	height:16px
+}
+
+TABLE.RowHeaderTable {
+	TABLE-LAYOUT: fixed;
+}
+
+TABLE.DataTable {
+	TABLE-LAYOUT: fixed;
+	BACKGROUND-COLOR:#fafaff;
+}
+
+/*****************　　COL　　******************/
+COL.CROSS_RH {
+	width:130;
+}
+
+COL.CH_DC {
+	width:840;
+}
+
+/******************　　TR　　******************/
+TABLE.SpreadTable TR{
+	HEIGHT: 22px;
+}
+
+/******************　　TD　　******************/
+TABLE.SpreadTable TD{
+	BORDER:0px;
+	BORDER-SPACING:0;
+	PADDING:0;
+	VERTICAL-ALIGN: top;
+}
+
+/* ページエッジの軸のドラッグ用アイコン、デフォルトメンバー表示エリア */
+TABLE.pageEdgeTable TD{
+	padding:0px 3px;
+	border:solid #F4F4FF 3
+}
+
+TABLE.CrossHeaderTable TD,TABLE.ColumnHeaderTable TD,TABLE.RowHeaderTable TD,TABLE.DataTable TD {
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+	WHITE-SPACE: nowrap;
+	BORDER-TOP: solid 1px white;
+	BORDER-BOTTOM: solid 1px gray;
+	BORDER-RIGHT: solid 1px gray;
+	BORDER-LEFT: solid 1px white;
+	VERTICAL-ALIGN: middle;
+}
+
+TABLE.ColumnHeaderTable TD,TABLE.DataTable TD {
+	WIDTH: 80px;
+}
+
+TABLE.CrossHeaderTable TD{
+	FONT-SIZE: 9pt;
+	COLOR: NAVY;
+	FONT-WEIGHT:bold;
+	TEXT-ALIGN: center;
+/*	BACKGROUND-COLOR: #99CCFF;*/
+	BACKGROUND-COLOR: #F4F4FF;
+	BORDER-WIDTH: 1 1 1 0;
+	BORDER-STYLE: solid;
+	BORDER-COLOR: gray;
+}
+
+TABLE.CH_TITLE_TABLE TD {
+	VERTICAL-ALIGN: middle;
+	background-color:#F4F4FF;
+}
+
+TD.colHieNames{
+	WIDTH:80;
+	FONT-SIZE: 9pt;
+	TEXT-ALIGN: center;
+	BORDER-WIDTH: 0 0 0 0;
+	BORDER-STYLE: solid;
+	BORDER-COLOR: gray;
+}
+
+TD.rowHieNames{
+	FONT-SIZE: 9pt;
+}
+
+TABLE.ColumnHeaderTable TD,TABLE.RowHeaderTable TD{
+	FONT-SIZE: 9pt;
+	BACKGROUND-COLOR:#99CCFF;
+	color:black;
+	font-weight:bold;
+	TEXT-ALIGN: left;
+}
+
+TABLE.DataTable TD{
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: 'MS UI Gothic';
+	TEXT-ALIGN: right;
+}
+
+TABLE.ColumnHeaderTable TD.adjustCell, TABLE.RowHeaderTable TD.adjustCell {
+	BACKGROUND-COLOR:white;
+	border:none; 
+}
+
+/******************　IMAGE 　******************/
+IMG{
+	vertical-align:middle;
+}
+

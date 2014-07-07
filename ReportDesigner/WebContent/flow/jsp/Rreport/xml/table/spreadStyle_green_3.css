@@ -1,0 +1,33 @@
+TABLE.ListTable
+{
+	margin-bottom:20;
+}
+
+TABLE.ListTable TD.ColHeader
+{
+	background-color:#C6EF97;
+	padding-left:4;
+	padding-top:4;
+	padding-bottom:2;
+	padding-right:2;
+	font-weight:bold;
+	border-bottom : 1 solid gray;
+	border-right:1 solid gray;
+}
+
+TABLE.ListTable TD
+{
+	padding-left:4;
+	padding-top:4;
+	padding-bottom:2;
+	padding-right:2;
+	background-color:#EBF9DC;
+	border-bottom : 1 solid gray;
+	border-right:1 solid gray;
+}
+
+caption
+{
+	font-weight:bold;
+	color:green;
+}

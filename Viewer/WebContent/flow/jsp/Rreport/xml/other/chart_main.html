@@ -1,0 +1,53 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS">
+<title>OpenOLAP</title>
+	<style>
+	v\:* { behavior: url(#default#VML); }
+	* { 
+		font-style:Arial 'MS UI Gothic';
+		font-size:12px;
+	}
+	</style>
+
+	<script language="JavaScript" src="chart.js"></script>
+	<link rel="stylesheet" type="text/css" href="common.css">
+	<link rel="stylesheet" type="text/css" href="../../../../../css/common.css">
+
+</head>
+<body onload="load()" kind='body' onselectstart="return false;" onmousemove='mymousemove();' onmouseup='mymouseup();' onmousedown='mymousedown()' background="bg.gif">
+	<div>
+
+
+
+		<div id='allObjDiv' style="position:absolute;top:0;left:0;"></div>
+		<div id='allObjDiv2' style="position:absolute;top:0;left:0;z-index:999;"></div>
+
+		<div name='lineSource' id='lineSource' style='position:absolute;top:0;left:0;'>
+			<v:line name='dashline' id='dashline' style='position:absolute;' from='0,0' to='0,0' strokecolor='blue' strokeweight='1pt'/>
+		</div>
+
+
+		<div name='selectRectSource' id='selectRectSource' style='position:absolute;top:0;left0;'>
+			<v:rect name='selectRect' id='selectRect' style='position:absolute;top:-100;left:-100;width:10;height:10;' strokecolor='blue' strokeweight='1pt' flip='x'>
+				<v:fill color="blue" opacity='0.1' />
+			</v:rect>
+		</div>
+
+
+		</div>
+
+
+	</div>
+
+	<form name="form_main" id="form_main" method="post" action="">
+		<input type="hidden" name="hid_sql" value="">
+	</form>
+
+<!--	<iframe name="frm_hidden_relation" src="blank.html" style="visibility:hidden;"></iframe>-->
+
+
+</body>
+</html>
+
+<!--<img src="co.png" class='iconImage'>-->

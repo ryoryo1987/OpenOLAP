@@ -1,0 +1,67 @@
+body{
+	scrollbar-face-color: #C9D8FC;
+	scrollbar-highlight-color: #B8CBF6;
+	scrollbar-shadow-color: #FFFFFF;
+	scrollbar-darkshadow-color: #9FB5D2;
+	scrollbar-arrow-color: #4D6185;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-track-color: #F4F3EE;
+}
+
+.container {
+	margin: 0px;
+	padding: 0px;
+	font: icon;
+	white-space: nowrap;
+}
+
+.treeItem {
+	padding: 0px;
+	margin: 0px;
+	font: icon;
+	color: black;
+	white-space: nowrap;
+}
+
+.treeItem a, .treeItem a:active, .treeItem a:hover {
+	margin-left: 3px;
+	padding: 1px 2px 1px 2px;
+}
+
+.treeItem a {
+	color: black;
+	text-decoration: none;
+}
+
+.treeItem a:hover {
+	color: #059AF8;
+	text-decoration: underline;
+}
+
+.treeItem a:active {
+	background: #059AF8;
+	color: white;
+	text-decoration: none;
+}
+
+.treeItem img {
+	vertical-align: middle;
+	border: 0px;
+}
+
+a.dragOver {
+	color: #059AF8;
+	text-decoration: underline;
+}
+
+a.dragEnd {
+	color: black;
+	text-decoration: none;
+}
+
+a.selectedClick {
+	background: #059AF8;
+	color: white;
+	text-decoration: none;
+}
+

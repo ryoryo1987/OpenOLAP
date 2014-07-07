@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml:stylesheet type="text/xsl" href="rowDisp.xsl"?>
+
+<!--  
+ *******execute SQL*******
+select
+     prod_class.class_id as クラスID
+    ,prod_class.short_name as クラス名ショート
+    ,prod_family.family_id as ファミリーID
+    ,prod_family.short_name as ファミリー名ショート
+    ,product.prod_id as プロダクトID
+    ,product.short_name as プロダクト名ショート
+from
+     prod_class,prod_family,product
+where
+        prod_class.class_id=prod_family.class_id
+    and prod_family.family_id=product.family_id
+group by
+     prod_class.class_id
+    ,prod_class.short_name
+    ,prod_family.family_id
+    ,prod_family.short_name
+    ,product.prod_id
+    ,product.short_name
+order by
+     prod_class.class_id
+    ,prod_class.short_name
+    ,prod_family.family_id
+    ,prod_family.short_name
+    ,product.prod_id
+    ,product.short_name
+
+
+Propertyの説明
+propertyId:一意に決めるもの
+rewrite:trueのものを設定できる（画面に出す）
+dispStr:画面に出す文字
+setKind:text or list 画面でのテキストボックスかリストか
+setName:値が設定してある属性の名前を入れる（ここの設定値から属性の名前を再度求める）
+setName→dispRow or line :実際の値が入っているところ
+listVal:setKindがListの時にある。SelectBoxの中の項目一覧、ValとNameは:区切り、項目は;区切り
+-->
+
+<OpenOLAP>
+	<property id='property'>
+		<dispRow propertyId='1' propKind='int3' rewrite='true' dispStr='一度に表示する行数' setKind='text' setName='dispRow' dispRow='30' startRow='1' endRow='1'/>
+		<tableLine  propertyId='2' rewrite='true' dispStr='セルの結合' setKind='list' setName='line' line='simple' listValKind = 'fix' listVal='simple:結合しない;union:結合する'/>
+
+		<rowHeader1 propertyId="103" rewrite="true" dispStr="行ヘッダー１" setKind="child" setName="child">
+			<rowHeaderCd1 propertyId='3' dispStr='ID：' setKind='list' setName='value' value='表題1' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+			<rowHeaderName1 propertyId='13' dispStr='名前：' setKind='list' setName='value' value='表題1' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+		</rowHeader1>
+		<rowHeader2 propertyId="104" rewrite="true" dispStr="行ヘッダー２" setKind="child" setName="child">
+			<rowHeaderCd2 propertyId='4' dispStr='ID：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+			<rowHeaderName2 propertyId='14' dispStr='名前：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+		</rowHeader2>
+		<rowHeader3 propertyId="105" rewrite="true" dispStr="行ヘッダー３" setKind="child" setName="child">
+			<rowHeaderCd3 propertyId='5' dispStr='ID：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+			<rowHeaderName3 propertyId='15' dispStr='名前：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+		</rowHeader3>
+
+		<colHeader1 propertyId="106" rewrite="true" dispStr="列ヘッダー１" setKind="child" setName="child">
+			<colHeaderCd1 propertyId='6' dispStr='ID：' setKind='list' setName='value' value='表題2' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+			<colHeaderName1 propertyId='16' dispStr='名前：' setKind='list' setName='value' value='表題2' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+		</colHeader1>
+		<colHeader2 propertyId="106" rewrite="true" dispStr="列ヘッダー２" setKind="child" setName="child">
+			<colHeaderCd2 propertyId='7' dispStr='ID：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+			<colHeaderName2 propertyId='17' dispStr='名前：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+		</colHeader2>
+		<colHeader3 propertyId="106" rewrite="true" dispStr="列ヘッダー３" setKind="child" setName="child">
+			<colHeaderCd3 propertyId='8' dispStr='ID：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+			<colHeaderName3 propertyId='18' dispStr='名前：' setKind='list' setName='value' value='0' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+		</colHeader3>
+
+		<pattern row='simple' frm="table" xslfile='2' file='crossTable'/>
+		<measures propertyId="106" rewrite="true" dispStr="メジャー" setKind="child" setName="child">
+			<measure1  propertyId='201' dispStr='' setKind='list' setName='value' value='表題3' listValKind = 'xmlNode' listVal='//OpenOLAP/sql/sqlcol/@*[name()="name"]'/>
+		</measures>
+	</property>
+
+	<sql id='sql'>
+		<sqlcol id='1' name='表題1' datatype='string' cellformat='str' dbId='0'/>
+		<sqlcol id='2' name='表題2' datatype='string' cellformat='str' dbId='0'/>
+		<sqlcol id='3' name='表題3' datatype='string' cellformat='str' dbId='0'/>
+	</sql>
+	<screenSql id='screenSql'>
+	</screenSql>
+
+<additionalData>
+<rowHeader>
+<row 表題1="データ1" 表題2="データ" 表題3="100"></row>
+<row 表題1="データ2" 表題2="データ" 表題3="200"></row>
+</rowHeader>
+<colHeader>
+<row 表題1="データ1" 表題2="データ" 表題3="100"></row>
+</colHeader>
+</additionalData>
+
+
+	<data>
+		<row 表題1='データ1' 表題2='データ' 表題3='100'/>
+		<row 表題1='データ2' 表題2='データ' 表題3='200'/>
+	</data>
+</OpenOLAP>

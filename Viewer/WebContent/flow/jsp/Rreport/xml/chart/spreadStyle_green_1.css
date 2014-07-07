@@ -1,0 +1,485 @@
+/******************  BODY  **********************/
+BODY#SpreadBody {
+	OVERFLOW: hidden;
+	POSITION: absolute; 
+	TOP: 0px; 
+	LEFT: 0px;
+}
+
+/******************  IFRAME  **********************/
+IFRAME#iframeTAG {
+	position: absolute;
+	right: 50px; 
+	height:24px;
+	width:40px;
+}
+
+/******************  SPAN  **********************/
+SPAN#CrossHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 150px;
+}
+
+SPAN#ColumnHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 750px;
+}
+
+SPAN#RowHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 150px;
+}
+
+/******************　　DIV　　 ******************/
+
+DIV#DataTableArea {
+	OVERFLOW: auto;
+	HEIGHT: 400px;
+	WIDTH:600px;
+	POSITION: absolute
+}
+
+/******************　　TABLE　　******************/
+
+TABLE.SpreadTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE.CrossHeaderTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE.ColumnHeaderTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE.RowHeaderTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE#DataTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE.DataTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE.ListTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+/*****************　　COL　　******************/
+COL.CROSS_RH {
+	width:130;
+}
+
+COL.CH_DC {
+	width:840;
+}
+
+/******************　　TR　　******************/
+TABLE.SpreadTable TR,TABLE.ColumnHeaderTable TR,TABLE.DataTable TR,TABLE.ListTable TR{
+	HEIGHT: 22px;
+}
+
+/******************　　TD　　******************/
+TABLE.SpreadTable TD{
+	BORDER:0px;
+	BORDER-SPACING:0;
+	PADDING:0;
+	VERTICAL-ALIGN: top;
+}
+
+TABLE.CrossHeaderTable TD,TABLE.ColumnHeaderTable TD,TABLE.RowHeaderTable TD,TABLE#DataTable TD,TABLE.DataTable TD,TABLE.ListTable TD {
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+	WHITE-SPACE: nowrap;
+	border: 1 solid gray;
+	vertical-align:middle;
+	padding-right:2px;
+}
+
+TABLE.CrossHeaderTable TD{
+	FONT-SIZE: 9pt;
+	COLOR: NAVY;
+	FONT-WEIGHT:bold;
+	TEXT-ALIGN: center;
+	BACKGROUND-COLOR: #F4F4FF;
+}
+
+TABLE.ColumnHeaderTable TD,TABLE.RowHeaderTable TD,TABLE.ListTable TD.ColHeader{
+	FONT-SIZE: 9pt;
+	color:black;
+	font-weight:bold;
+	TEXT-ALIGN: left;
+}
+
+TABLE.ColumnHeaderTable TD {
+	border-bottom:none;
+}
+
+TABLE.RowHeaderTable TD {
+	border-right:none;
+}
+
+TABLE#DataTable TD{
+	FONT-SIZE: 9pt;
+	TEXT-ALIGN: right;
+}
+
+TABLE.DataTable TD,TABLE.ListTable TD{
+	FONT-SIZE: 9pt;
+	TEXT-ALIGN: right;
+}
+
+.colHieNames{
+	WIDTH:80;
+	FONT-SIZE: 9pt;
+}
+
+.rowHieNames{
+	FONT-SIZE: 9pt;
+}
+
+.adjustCell {
+	BACKGROUND-COLOR:white;
+	border:none; 
+}
+
+/******************　IMAGE 　******************/
+IMG{
+	vertical-align:middle;
+}
+
+/******************　色の塗りつぶし　*********************************************/
+/* TABLE.<Column/Row>HeaderTable TD.XXX          →　通常のヘッダーの色          */
+/* TABLE#DataTable XXX                           →　通常のデータセルの色        */
+/* TABLE.<Column/Row>HeaderTable TD.SelectedXXX  →　選択時のヘッダーの色        */
+/* TABLE#DataTable TD.SelectedXXX                →　選択時のデータセルの色      */
+
+/* 色塗りつぶしなし */
+TABLE.ColumnHeaderTable TD.Selected, TABLE.RowHeaderTable TD.Selected
+{
+	background-color:#7B9ABD;
+}
+
+TABLE#DataTable TD.Selected
+{
+	background-color:#CECBCE;
+}
+
+TABLE.DataTable TD.Selected
+{
+	background-color:#CECBCE;
+}
+
+/* 赤 */
+TABLE.ColumnHeaderTable TD.Red, TABLE.RowHeaderTable TD.Red
+{
+	background-color:#ff3333;
+}
+
+TABLE#DataTable TD.Red
+{
+	background-color:#ffcccc;
+}
+
+TABLE.DataTable TD.Red
+{
+	background-color:#ffcccc;
+}
+
+
+TABLE.ColumnHeaderTable TD.SelectedRed, TABLE.RowHeaderTable TD.SelectedRed
+{
+	background-color:#CE0000;
+
+}
+
+TABLE#DataTable TD.SelectedRed
+{
+	background-color:#CE9A9C;
+}
+
+TABLE.DataTable TD.SelectedRed
+{
+	background-color:#CE9A9C;
+}
+
+/* オレンジ */
+TABLE.ColumnHeaderTable TD.Orange, TABLE.RowHeaderTable TD.Orange
+{
+	background-color:#FF9A00;
+}
+
+TABLE#DataTable TD.Orange
+{
+	background-color:#ffe699;
+}
+
+TABLE.DataTable TD.Orange
+{
+	background-color:#ffe699;
+}
+
+TABLE.ColumnHeaderTable TD.SelectedOrange, TABLE.RowHeaderTable TD.SelectedOrange
+{
+	background-color:#CE6900;
+}
+
+TABLE#DataTable TD.SelectedOrange
+{
+	background-color:#CE9A63;
+}
+
+TABLE.DataTable TD.SelectedOrange
+{
+	background-color:#CE9A63;
+}
+
+/* 黄色 */
+TABLE.ColumnHeaderTable TD.Yellow, TABLE.RowHeaderTable TD.Yellow
+{
+	background-color:#FFFF00;
+}
+
+TABLE#DataTable TD.Yellow
+{
+	background-color:#FFFF9C;
+}
+
+TABLE.DataTable TD.Yellow
+{
+	background-color:#FFFF9C;
+}
+
+TABLE.ColumnHeaderTable TD.SelectedYellow, TABLE.RowHeaderTable TD.SelectedYellow
+{
+	background-color:#CECF31;
+}
+
+TABLE#DataTable TD.SelectedYellow
+{
+	background-color:#CECF63;
+}
+
+TABLE.DataTable TD.SelectedYellow
+{
+	background-color:#CECF63;
+}
+
+/* 緑 */
+TABLE.ColumnHeaderTable TD.Green, TABLE.RowHeaderTable TD.Green
+{
+	background-color:#75f094;
+}
+
+TABLE#DataTable TD.Green
+{
+	background-color:#CEFFCE;
+}
+
+TABLE.DataTable TD.Green
+{
+	background-color:#CEFFCE;
+}
+
+TABLE.ColumnHeaderTable TD.SelectedGreen, TABLE.RowHeaderTable TD.SelectedGreen
+{
+	background-color:#73C373;
+}
+
+TABLE#DataTable TD.SelectedGreen
+{
+	background-color:#9CCF9C;
+}
+
+TABLE.DataTable TD.SelectedGreen
+{
+	background-color:#9CCF9C;
+}
+
+/* 水色 */
+TABLE.ColumnHeaderTable TD.LightBlue, TABLE.RowHeaderTable TD.LightBlue
+{
+	background-color:#75f0f0;
+}
+
+TABLE#DataTable TD.LightBlue
+{
+	background-color:#CEFFFF;
+}
+
+TABLE.DataTable TD.LightBlue
+{
+	background-color:#CEFFFF;
+}
+
+
+TABLE.ColumnHeaderTable TD.SelectedLightBlue, TABLE.RowHeaderTable TD.SelectedLightBlue
+{
+	background-color:#42BEBD;
+}
+
+TABLE#DataTable TD.SelectedLightBlue
+{
+	background-color:#9CCFCE;
+}
+
+TABLE.DataTable TD.SelectedLightBlue
+{
+	background-color:#9CCFCE;
+}
+
+/* 青 */
+TABLE.ColumnHeaderTable TD.Blue, TABLE.RowHeaderTable TD.Blue
+{
+	background-color:#66b3ff;
+}
+
+TABLE#DataTable TD.Blue
+{
+	background-color:#dde6ff;
+}
+
+TABLE.DataTable TD.Blue
+{
+	background-color:#dde6ff;
+}
+
+TABLE.ColumnHeaderTable TD.SelectedBlue, TABLE.RowHeaderTable TD.SelectedBlue
+{
+	background-color:#3182CE;
+}
+
+TABLE#DataTable TD.SelectedBlue
+{
+	background-color:#9CB6CE;
+}
+
+TABLE.DataTable TD.SelectedBlue
+{
+	background-color:#9CB6CE;
+}
+
+/* 紫 */
+TABLE.ColumnHeaderTable TD.Purple, TABLE.RowHeaderTable TD.Purple
+{
+	background-color:#e085e0;
+}
+
+TABLE#DataTable TD.Purple
+{
+	background-color:#f7ddff;
+}
+
+TABLE.DataTable TD.Purple
+{
+	background-color:#f7ddff;
+}
+
+TABLE.ColumnHeaderTable TD.SelectedPurple, TABLE.RowHeaderTable TD.SelectedPurple
+{
+	background-color:#8451AD;
+}
+
+TABLE#DataTable TD.SelectedPurple
+{
+	background-color:#B59ACE;
+}
+
+TABLE.DataTable TD.SelectedPurple
+{
+	background-color:#B59ACE;
+}
+
+/* ピンク */
+TABLE.ColumnHeaderTable TD.Pink, TABLE.RowHeaderTable TD.Pink
+{
+	background-color:#ff66b3;
+}
+
+TABLE#DataTable TD.Pink
+{
+	background-color:#fce0f5;
+}
+
+TABLE.DataTable TD.Pink
+{
+	background-color:#fce0f5;
+}
+
+TABLE.ColumnHeaderTable TD.SelectedPink, TABLE.RowHeaderTable TD.SelectedPink
+{
+	background-color:#CE3484;
+}
+
+TABLE#DataTable TD.SelectedPink
+{
+	background-color:#CE9ACE;
+}
+
+TABLE.DataTable TD.SelectedPink
+{
+	background-color:#CE9ACE;
+}
+
+
+/*************　戸田追加　**************/
+
+TABLE.ColumnHeaderTable TD.default1,TABLE.RowHeaderTable TD.default1,
+TABLE.ListTable TD.ColHeader
+{
+	background-color:#A4F13A;
+}
+
+TABLE.ColumnHeaderTable TD.default2,TABLE.RowHeaderTable TD.default2
+{
+	background-color:#c2f67c;
+}
+
+TABLE.ColumnHeaderTable TD.default3,TABLE.RowHeaderTable TD.default3
+{
+	background-color:#d7f9a7;
+}
+
+TABLE.ColumnHeaderTable TD.default4,TABLE.RowHeaderTable TD.default4
+{
+	background-color:#e1fabd;
+}
+
+TABLE.ColumnHeaderTable TD.default5,TABLE.RowHeaderTable TD.default5
+{
+	background-color:#ebfcd3;
+}
+
+TABLE.ColumnHeaderTable TD.default6,TABLE.RowHeaderTable TD.default6
+{
+	background-color:#f5fde9;
+}
+
+TABLE.ColumnHeaderTable TD.default7,TABLE.RowHeaderTable TD.default7
+{
+	background-color:#f5fde9;
+}
+
+TABLE.ColumnHeaderTable TD.default8,TABLE.RowHeaderTable TD.default8
+{
+	background-color:#f5fde9;
+}
+
+TABLE#DataTable TD
+{
+	background-color:#f5fcea;
+}
+
+TABLE.DataTable TD,TABLE.ListTable TD
+{
+	background-color:#f5fcea;
+}
+caption
+{
+	font-weight:bold;
+	color:green;
+}

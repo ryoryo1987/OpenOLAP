@@ -1,0 +1,232 @@
+/********************* BODY *********************/
+body 
+{ 
+	background-color : white;
+	margin : 0;
+}
+
+/********************* 文字関連 *********************/
+/* 文字共通 */
+body,tr,th,td,select,input,textarea 
+{
+	font-family : 'MS UI Gothic', serif;
+	font-weight : normal;
+	font-size : 12px;
+	color : black;
+}
+
+
+/********************* img ***************************/
+img 
+{
+	border-style : none;
+	margin:0;
+}
+
+
+
+.divObj{
+	position:absolute;
+}
+.selectedDivObj{
+	position:absolute;
+}
+
+.rectTitle{
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+	VERTICAL-ALIGN: middle;
+	font-size:10px;
+	white-space:nowrap;
+	cursor:hand;
+	width:150;
+	height:10;
+}
+.imgTitle{
+	position:relative;
+	top:2;
+	left:2;
+	width:10;
+	height:10;
+}
+.divContents{
+	position:absolute;
+	top:11;
+	left:0;
+}
+.rectContents{
+	width:150;
+	height:100;
+}
+.imgContents{
+	background-image:url(co.png);
+	background-repeat:no-repeat;
+	position:relative;
+	top:0;
+	left:0;
+	width:30;
+	height:20
+}
+.divContentsText{
+	position:relative;top:0;left:10;
+	overflow:auto;
+	font-size:12px;
+	width:140;
+	height:80;
+}
+
+.GamenText{
+	position:relative;top:10;left:10;
+	overflow:auto;
+	font-size:20px;
+	width:100;
+	height:50;
+}
+
+/********************* 右画面 *********************/
+.background
+{
+	width:100%;
+	height:100%;
+	background:url("bg.jpg") repeat;
+	margin-left:8px;
+}
+
+/********************* ポップアップ *********************/
+.popup
+{
+	margin:20;
+}
+
+.popup_title,.popup_data,.popup_comment,.popup_link,.popup_bottom
+{
+	font-size:11px;
+	padding:4px;
+	border:1 solid #ECAE57;
+}
+
+.popup_title,.popup_link
+{
+	background-color:#FFDF7C;
+	text-align:center;
+}
+.popup_title,.popup_data,.popup_link
+{
+	height:22;
+	display:inline;
+}
+
+.popup_comment,.popup_link,.popup_bottom
+{
+	width:200;
+}
+
+.popup_title
+{
+	width:100;
+	border-bottom:none;
+}
+
+.popup_data
+{
+	background-color:#FFF5A0;
+	text-align:right;
+	width:100;
+	border-left:none;
+	border-bottom:none;
+}
+
+.popup_comment
+{
+	background-color:#FFF5A0;
+	border-bottom:none;
+}
+
+.popup_link
+{
+	text-align:left;
+}
+
+.popup_bottom
+{
+	height:1;
+	overflow:hidden;
+}
+
+
+.popup_title_pin,.popup_title_hall1,.popup_title_hall2
+{
+	display:inline;
+	padding:0;
+	width:23;
+	height:30;
+}
+.popup_title_pin
+{
+	background:url('pin.gif') no-repeat;
+}
+
+.popup_title_hall1,.popup_title_hall2
+{
+	background:url('hall.gif') no-repeat;
+}
+
+.popup_title_name
+{
+	display:inline;
+	padding:0;
+	width:180;
+	height:30;
+	font-size:11px;
+	padding-top:16px;
+	background:url('popup_title.gif') repeat-x;
+}
+
+.popup_title_right
+{
+	display:inline;
+	padding:0;
+	background:url('popup_title_r.gif') no-repeat;
+	width:1;
+	height:30;
+}
+
+.popup_data_table
+{
+	margin-left:4px;
+}
+
+a:visited	{color:#0099CC;}
+a:link		{color:#0099CC;}
+a:active	{color:#FF3366;}
+a:hover		{color:#FF6699;}
+
+
+/********************* マーク *********************/
+.OK
+{
+	width:32px;
+	height:32px;
+	background:url("OK.gif");
+}
+
+.warning
+{
+	width:32px;
+	height:32px;
+	background:url("warning.gif");
+}
+
+.NG
+{
+	width:32px;
+	height:32px;
+	background:url("NG.gif");
+}
+
+.mark
+{
+	text-align:center;
+}
+
+

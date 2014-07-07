@@ -1,0 +1,40 @@
+/******************************************************************
+ システム名	：OpenOLAP
+ ファイル名	：view.css
+ 作成		：
+ 修正履歴	：----/--/--
+ 備考		：Cubic Viewer用スタイルシート
+			　（Cube Managerで使用）
+******************************************************************/
+
+body {
+	margin :0;
+	background-color : #B8CCEF;
+}
+
+table.standard {
+	width : auto;
+	border-collapse:collapse;
+	border-style:none;
+
+}
+
+td.blank {
+	background-color : Gainsboro;
+	border-color : gray;
+	border-style : solid;
+	border-width : 1;
+}
+
+div.view_title {
+
+	height : 50px;
+	background : url("../../images/title.gif") repeat-x;
+	margin : 0px;
+	padding : 0px;
+}
+
+select {
+	margin : 0px 3px 3px 0px;
+}
+

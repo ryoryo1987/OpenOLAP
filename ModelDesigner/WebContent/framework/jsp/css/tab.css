@@ -1,0 +1,170 @@
+/******************************************************************
+システム名	：OpenOLAP
+ファイル名	：tab.css
+作成		：
+修正履歴	：----/--/--
+備考		：各画面タイトル＆タブ用スタイルシート
+******************************************************************/
+/* body */
+body { 
+	margin : 0;
+	background-color: #FFFFFF;
+}
+
+div,td{
+	font-family : 'Arial', selif ;					/* English*/
+	/* font-family : 'MS UI Gothic', selif ;*/		/* Japanese*/
+}
+
+
+/* タイトルの設定 → 移行が終わったら削除*/
+div.title {
+	width : 100%;
+	height : 50px;
+	background : url("../../images/title.gif") repeat-x;
+	margin : 0px 0px 14px 0px;
+	padding : 0px;
+	color : white;
+	font-weight : bold;
+}
+		table.title
+		{
+			width:100%;
+			height:50px;
+			border-collapse:collapse;
+			margin:0 0 14 0;
+			background:url(../../images/title.gif) repeat-x;
+		}
+		td.title
+		{
+			padding:0;
+			vertical-align:top;
+		}
+		td.logout
+		{
+			text-align:right;
+			vertical-align:top;
+			padding-top:12;
+			font-size:12px;
+		}
+		a.logout
+		{
+			color:white;
+			text-decoration:underline;
+		}
+		
+		a.logout:hover
+		{
+			color:orange;
+			background-color:transparent;
+		}
+
+/* タブの設定 */
+
+table.tab {
+	margin : 0px;
+	bodrer-style:none;
+	border-collapse:collapse;
+}
+
+td.on_tab_new,td.on_tab_exp,td.on_tab_lst,td.on_tab_change,td.on_tab_report {
+	width : 118px;
+	height : 26px;
+	margin : 0px;
+	border-style : none;
+	vertical-align : bottom;
+	background-repeat : no-repeat;
+}
+
+td.off_tab_new,td.off_tab_exp,td.off_tab_lst,td.off_tab_change,td.off_tab_report {
+	width : 118px;
+	height : 26px;
+	margin : 0px;
+	border-top : 2 solid white;
+	border-bottom : none;
+	border-left : none;
+	border-right : none;
+	background-repeat : no-repeat;
+}
+
+
+
+
+
+	/* ON */
+td.on_tab_new { 
+	background-image : url("../../images/crt_tab_on.jpg");
+}
+
+td.on_tab_exp { 
+	background-image : url("../../images/exp_tab_on.jpg");
+}
+
+td.on_tab_lst { 
+	background-image : url("../../images/view_tab_on.jpg");
+}
+
+td.on_tab_change { 
+	background-image : url("../../images/change_tab_on.jpg");
+}
+
+td.on_tab_report {
+	background-image : url("../../images/report_tab_on.jpg");
+}
+	/* OFF */
+
+td.off_tab_new { 
+	background-image : url("../../images/crt_tab_off.gif");
+}
+
+td.off_tab_exp { 
+	background-image : url("../../images/exp_tab_off.gif");
+}
+
+td.off_tab_lst { 
+	background-image : url("../../images/view_tab_off.gif");
+}
+
+td.off_tab_change { 
+	background-image : url("../../images/change_tab_off.gif");
+}
+
+td.off_tab_report { 
+	background-image : url("../../images/report_tab_off.gif");
+}
+/* ++++++++++++++++++++ Old +++++++++++++++++++++ */
+td.on_tab { 
+	width : 118px;
+	height : 26px;
+	margin : 0px;
+	border-style : none;
+	vertical-align : bottom;
+	background-repeat : no-repeat;
+}
+
+td.off_tab { 
+	width : 118px;
+	height : 26px;
+	margin : 0px;
+	border-top : 2 solid white;
+	border-bottom : none;
+	border-left : none;
+	border-right : none;
+	background-repeat : no-repeat;
+}
+
+/* ++++++++++++++++++++ Old +++++++++++++++++++++ */
+
+
+
+/* リンク共通 */
+a { 
+	text-decoration:none;
+ }
+a.a_tab:link { 
+	color:dimgray;
+ }
+a.a_tab:visited { 
+	color:dimgray;
+ }
+

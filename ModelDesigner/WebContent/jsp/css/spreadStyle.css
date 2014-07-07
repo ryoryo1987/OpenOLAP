@@ -1,0 +1,146 @@
+/******************  BODY  **********************/
+BODY#SpreadBody {
+	OVERFLOW: hidden;
+	POSITION: absolute; 
+	TOP: 0px; 
+	LEFT: 0px;
+}
+
+/******************  IFRAME  **********************/
+IFRAME#iframeTAG {
+	position: absolute;
+	right: 50px; 
+	height:24px;
+	width:40px;
+}
+
+/******************  SPAN  **********************/
+SPAN#CrossHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 150px;
+}
+
+SPAN#ColumnHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 750px;
+}
+
+SPAN#RowHeaderArea {
+	OVERFLOW: hidden; 
+	WIDTH: 150px;
+}
+
+/******************　　DIV　　 ******************/
+
+DIV#DataTableArea {
+	OVERFLOW: auto;
+	HEIGHT: 100%;
+	WIDTH: 100%;
+	POSITION: absolute
+}
+
+/******************　　TABLE　　******************/
+
+TABLE.SpreadTable {
+	BORDER-COLLAPSE: collapse;
+}
+
+TABLE.CrossHeaderTable {
+	TABLE-LAYOUT: fixed;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+
+TABLE.ColumnHeaderTable {
+	TABLE-LAYOUT: fixed;
+}
+
+TABLE.RowHeaderTable {
+	TABLE-LAYOUT: fixed;
+}
+
+TABLE#DataTable {
+	TABLE-LAYOUT: fixed;
+}
+
+/*****************　　COL　　******************/
+COL.CROSS_RH {
+	width:130;
+}
+
+COL.CH_DC {
+	width:840;
+}
+
+/******************　　TR　　******************/
+TABLE.SpreadTable TR{
+	HEIGHT: 17px;
+}
+
+TABLE.ColumnHeaderTable TR,TABLE.RowHeaderTable TR{
+	BACKGROUND-COLOR:buttonface;
+
+}
+/******************　　TD　　******************/
+TABLE.SpreadTable TD{
+	BORDER:0px;
+	BORDER-SPACING:0;
+	PADDING:0;
+	VERTICAL-ALIGN: top;
+}
+
+TABLE.CrossHeaderTable TD,TABLE.ColumnHeaderTable TD,TABLE.RowHeaderTable TD,TABLE#DataTable TD {
+	WHITE-SPACE: nowrap;
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+	BORDER-TOP: solid 1px white;
+	BORDER-BOTTOM: solid 1px white;
+	BORDER-RIGHT: solid 1px white;
+	BORDER-LEFT: solid 1px white;
+	VERTICAL-ALIGN: middle;
+	WORD-BREAK: keep-all;
+}
+
+TABLE.CrossHeaderTable TD{
+	FONT-SIZE: 9pt;
+	COLOR: NAVY;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: center;
+	BACKGROUND-COLOR: #99CCFF;
+}
+
+TABLE.ColumnHeaderTable TD,TABLE.RowHeaderTable TD{
+	BORDER-TOP: solid 1px buttonhighlight;
+	BORDER-BOTTOM: solid 1px buttonshadow;
+	BORDER-RIGHT: solid 1px buttonhighlight;
+	BORDER-LEFT: solid 1px buttonshadow;
+	PADDING: 3px;
+	FONT-SIZE: 9pt;
+	COLOR: black;
+	FONT-WEIGHT: NORMAL;
+	TEXT-ALIGN: left;
+}
+
+TABLE#DataTable TD{
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: 'MS UI Gothic';
+	TEXT-ALIGN: left;
+}
+
+.colHieNames{
+	WIDTH:80;
+	FONT-SIZE: 9pt;
+}
+
+.rowHieNames{
+	FONT-SIZE: 9pt;
+}
+
+.adjustCell {
+	BACKGROUND-COLOR:white;
+	border:none; 
+}
+/******************　IMAGE 　******************/
+IMG{
+	vertical-align:middle;
+}

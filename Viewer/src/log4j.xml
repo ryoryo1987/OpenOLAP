@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<!-- ******* アペンダセクション 開始 ******* -->
+
+		<!-- アペンダ（ファイル出力）-->
+	    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+	        <param name="File" value="C:\work\viewer.log" />
+	        
+	        <layout class="org.apache.log4j.PatternLayout">
+	            <param name="ConversionPattern"
+	                   value="%d{yyyy/MM/dd HH:mm:ss} [%p]%r:%c:%n%m%n" />
+	        </layout>
+	    </appender>
+
+	<!-- ******* アペンダセクション 終了 ******* -->
+
+
+    <!-- ******* カスタムloggerセクション 開始 ******* -->
+
+		<!-- カスタムlogger サンプル（パッケージ指定） -->
+        <logger name="openolap.viewer.chart">
+            <level value="WARN"/>
+            <appender-ref ref="FILE" />
+        </logger>
+
+		<!-- カスタムlogger サンプル（クラス指定） -->
+        <logger name="openolap.viewer.dao.PostgresDimensionMemberDAO">
+            <level value="WARN"/>
+            <appender-ref ref="FILE" />
+        </logger>
+
+		<!-- クライアントからのRequestパラメータ ロギング -->
+        <logger name="openolap.viewer.filter.LoggingRequestFilter">
+            <level value="WARN"/>
+            <appender-ref ref="FILE" />
+        </logger>
+
+		<!-- クライアントからのリクエスト時のSession情報 ロギング -->
+        <logger name="openolap.viewer.filter.LoggingSessionFilter">
+            <level value="WARN"/>
+            <appender-ref ref="FILE" />
+        </logger>
+
+    <!-- ******* custom loggerセクション  終了 ******* -->
+
+
+    <!-- ******* root logger 開始 ******* -->
+
+	    <root>
+	        <level value="WARN" />
+	        <appender-ref ref="FILE" />
+	    </root>
+
+    <!-- ******* root logger 停止 ******* -->
+
+</log4j:configuration>

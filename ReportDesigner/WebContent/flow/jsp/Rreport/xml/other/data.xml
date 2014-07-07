@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml:stylesheet type="text/xsl" href="relation.xsl"?>
+
+<!--  
+Propertyの説明
+propertyId:一意に決めるもの
+rewrite:trueのものを設定できる（画面に出す）
+dispStr:画面に出す文字
+setKind:text or list 画面でのテキストボックスかリストか
+		→child 子供がそれらを持っている。
+setName:値が設定してある属性の名前を入れる（ここの設定値から属性の名前を再度求める）
+setName→dispRow or line :実際の値が入っているところ
+listVal:setKindがListの時にある。SelectBoxの中の項目一覧、ValとNameは:区切り、項目は;区切り
+-->
+
+<OpenOLAP>
+	<property id='property'>
+		<pattern row='simple' file='relation'/>
+		<dispRow propertyId="1" dispStr="一度に表示する行数" setKind="text" setName="dispRow" dispRow="0" startRow="1" endRow="5"/>
+		<obj_id propertyId="2" rewrite="true" dispStr="ID" setKind="list" setName="value" value="表題1"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<par_id propertyId="3" rewrite="true" dispStr="親ID" setKind="list" setName="value" value="表題2"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<name propertyId="4" rewrite="true" dispStr="表示名" setKind="list" setName="value" value="表題1"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<measure propertyId="5" rewrite="true" dispStr="判別数値" setKind="list" setName="value" value="表題3"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<type propertyId="6" dispStr="表示タイプカラム" setKind="list" setName="value" value="0"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<point1 propertyId="7" rewrite="true" dispStr="閾値1" setKind="text" setName="value" value="0" />
+		<point2 propertyId="8" rewrite="true" dispStr="閾値2" setKind="text" setName="value" value="100"/>
+		<popup1 propertyId="9" rewrite="true" dispStr="ポップアップ1" setKind="list" setName="value" value="0"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<popup2 propertyId="10" rewrite="true" dispStr="ポップアップ2" setKind="list" setName="value" value="0"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<popup3 propertyId="11" rewrite="true" dispStr="ポップアップ3" setKind="list" setName="value" value="0"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<popup4 propertyId="12" rewrite="true" dispStr="ポップアップ4" setKind="list" setName="value" value="0"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<popup5 propertyId="13" rewrite="true" dispStr="ポップアップ5" setKind="list" setName="value" value="0"  listValKind = "xmlNode" listVal="//OpenOLAP/sql/sqlcol/@*[name()='name']"/>
+		<saveSql sql="update oo_v_report set screen_xsl5='%%data%%' where report_id='%%report_id%%'"/>
+		<selectSql sql="select screen_xsl5 from oo_v_report where report_id='%%report_id%%'"/>
+
+	</property>
+
+	<sql id='sql'>
+		<sqlcol id="1" name="表題1" datatype="string" cellformat="str" dbId="0"/>
+		<sqlcol id="2" name="表題2" datatype="string" cellformat="str" dbId="0"/>
+		<sqlcol id="3" name="表題3" datatype="string" cellformat="str" dbId="0"/>
+	</sql>
+	<screenSql id="screenSql">
+	</screenSql>
+	<data>
+		<row 表題1="データ"  表題2="" 表題3="0"/>
+		<row 表題1="データ1" 表題2="データ" 表題3="0"/>
+		<row 表題1="データ2" 表題2="データ" 表題3="0"/>
+	</data>
+</OpenOLAP>

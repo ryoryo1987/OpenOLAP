@@ -1,0 +1,162 @@
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS" />
+<title><%=(String)session.getValue("aplName")%></title>
+<link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+<link type="text/css" rel="stylesheet" href="../../../css/tree.css" />
+<script language="JavaScript1.2" src="js/dbtree.js"></script>
+</head>
+<script type="text/JavaScript1.2">
+var cssXSL = new ActiveXObject("MSXML2.DOMDocument");
+cssXSL.async = false;
+cssXSL.load("screen_css.xsl");
+var xmlData = new ActiveXObject("MSXML2.DOMDocument");
+
+	function loadCssXML(xmlString){
+		xmlData.loadXML(xmlString);
+		var strResult = xmlData.transformNode(cssXSL);
+		var treeObj = document.getElementById("treeObj");
+		treeObj.innerHTML = strResult;
+	}
+
+	function clickNode(th){
+		//Set Property
+//		var screenType = parent.frm_property.document.getElementById("styleType");
+//		screenType.innerText=th.outerText;
+//		screenType.seq=th.id;
+
+
+
+		var source = xmlData.selectSingleNode("//*[@id="+th.id+"]");
+		var screenType = parent.frm_property.document.getElementById("styleType");
+		screenType.innerText=source.getAttribute("name");
+		screenType.seq=source.getAttribute("id");
+		displayScreen(source);
+	}
+	function getScreenXML(){
+		return dispXML;
+	}
+	function getScreenFileXML(){
+		return dispFileXML;
+	}
+	function getScreenXSL(num){
+		if(num==1){
+			return dispXSL1;
+		}else if(num==2){
+			return dispXSL2;
+		}else if(num==3){
+			return dispXSL3;
+		}else if(num==4){
+			return dispXSL4;
+		}else if(num==5){
+			return dispXSL5;
+		}else if(num==6){
+			return dispXSL6;
+		}
+	}
+
+//****************************************************************************
+var dispXSL1 = new ActiveXObject("MSXML2.DOMDocument");
+dispXSL1.async = false;
+var dispXSL2 = new ActiveXObject("MSXML2.DOMDocument");
+dispXSL2.async = false;
+var dispXSL3 = new ActiveXObject("MSXML2.DOMDocument");
+dispXSL3.async = false;
+var dispXSL4 = new ActiveXObject("MSXML2.DOMDocument");
+dispXSL4.async = false;
+var dispXSL5 = new ActiveXObject("MSXML2.DOMDocument");
+dispXSL5.async = false;
+var dispXSL6 = new ActiveXObject("MSXML2.DOMDocument");
+dispXSL6.async = false;
+
+var dispXML = new ActiveXObject("MSXML2.DOMDocument");
+dispXML.async = false;
+var dispFileXML = new ActiveXObject("MSXML2.DOMDocument");
+dispFileXML.async = false;
+
+	function reloadDisplayXML(){//Modelが変更されたときに呼び出される。
+//alert("いれかえ")
+//alert(dispFileXML.xml);
+//alert(dispXML.xml);
+		dispXML.loadXML(dispFileXML.xml);
+	}
+
+	function displayScreen(xmlNode){
+		dispXML.load(""+xmlNode.parentNode.getAttribute("fileName"));
+		dispFileXML.loadXML(dispXML.xml);
+
+		dispXSL1.load(""+xmlNode.parentNode.getAttribute("xslfileName1"));
+		if(xmlNode.parentNode.getAttribute("xslfileName2")!=null){
+			dispXSL2.load(""+xmlNode.parentNode.getAttribute("xslfileName2"));
+		}else{
+			dispXSL2.loadXML("");//初期化（最初別画面を選択して読み込まれていた場合、クリア）
+		}
+		if(xmlNode.parentNode.getAttribute("xslfileName3")!=null){
+			dispXSL3.load(""+xmlNode.parentNode.getAttribute("xslfileName3"));
+		}else{
+			dispXSL3.loadXML("");
+		}
+		if(xmlNode.parentNode.getAttribute("xslfileName4")!=null){
+			dispXSL4.load(""+xmlNode.parentNode.getAttribute("xslfileName4"));
+		}else{
+			dispXSL4.loadXML("");
+		}
+		if(xmlNode.parentNode.getAttribute("xslfileName5")!=null){
+			dispXSL5.load(""+xmlNode.parentNode.getAttribute("xslfileName5"));
+		}else{
+			dispXSL5.loadXML("");
+		}
+		if(xmlNode.parentNode.getAttribute("xslfileName6")!=null){
+			dispXSL6.load(""+xmlNode.parentNode.getAttribute("xslfileName6"));
+		}else{
+			dispXSL6.loadXML("");
+		}
+
+//alert(xmlNode.parentNode.getAttribute("xslfileName1"));
+//alert(xmlNode.parentNode.getAttribute("xslfileName2"));
+//alert(xmlNode.parentNode.getAttribute("xslfileName3"));
+//alert(xmlNode.parentNode.getAttribute("xslfileName4"));
+//alert(xmlNode.parentNode.getAttribute("xslfileName5"));
+//alert(xmlNode.parentNode.getAttribute("xslfileName6"));
+
+	var styleNode = dispXSL1.selectSingleNode("//*[@id='stylefile']");
+	styleNode.setAttribute("href",""+xmlNode.getAttribute("fileName"));
+
+	var strResult = dispXML.transformNode(dispXSL1);
+//alert(1);
+	parent.frm_displayScreen.document.open();
+//alert(2);
+	strResult=strResult.replace('<META http-equiv="Content-Type" content="text/html; charset=UTF-16">','');
+//alert(strResult);
+	parent.frm_displayScreen.document.write(strResult);
+//alert(3);
+	}
+
+</script>
+<body style="margin-top:0px;margin-left:0px;padding-top:0px;background : url('../../../images/Rreport/title.gif') white repeat-x">
+<form name="navi_form" id="navi_form" target="navi_frm" method="post" action="">
+<input type="hidden" name="preClick" />
+<input type="hidden" name="child_record" value="" />
+<input type="hidden" name="parent_record" value="" />
+<input type="hidden" name="objKind" value="" />
+<input type="hidden" name="seqId" value="" />
+<input type="hidden" name="change_flg" value="0" />
+<input type="hidden" name="copyObj_objKind" value="" />
+<input type="hidden" name="copyObj_id" value="" />
+<input type="hidden" name="copyParentObj_objKind" value="" />
+<input type="hidden" name="copyParentObj_id" value="" />
+
+<table class="Header">
+	<tr>
+		<td class="HeaderTitleLeft"></td>
+		<td class="HeaderTitleCenter">スタイル</td>
+	</tr>
+</table>
+
+
+<div id="treeObj" style="margin-left:7">
+</div>
+
+</form>
+</body>
+</html>

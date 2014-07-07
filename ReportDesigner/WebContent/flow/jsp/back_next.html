@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS">
+		<title>OpenOLAP</title>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css">
+		<script type="text/javascript" src="js/registration.js"></script>
+		<script language="JavaScript">
+
+			function pushBack(){
+				parent.parent.document.body.firstChild.cols = "*,0,0";
+				document.form_main.action = "../blank.html";
+				document.form_main.target = "frm_main3";
+				document.form_main.submit();
+			}
+
+			function pushNext() {
+				parent.parent.document.body.firstChild.cols = "0,0,*";
+				document.form_main.action = "frm_report_rgs.jsp";
+				document.form_main.target = "frm_main3";
+				document.form_main.submit();
+
+			}
+
+		</script>
+	</head>
+	<body>
+		<form name="form_main" id="form_main" method="post">
+			<div class="WizardButtonArea2">
+				<input type="button" value="" onclick="pushBack();setChangeFlg();" class="normal_back" onMouseOver="className='over_back'" onMouseDown="className='down_back'" onMouseUp="className='up_back'" onMouseOut="className='out_back'">
+				<input type="button" value="" onclick="pushNext();setChangeFlg();" class="normal_next" onMouseOver="className='over_next'" onMouseDown="className='down_next'" onMouseUp="className='up_next'" onMouseOut="className='out_next'">
+			</div>
+		</form>
+	<body>
+</html>

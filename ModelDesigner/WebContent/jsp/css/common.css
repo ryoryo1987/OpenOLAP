@@ -1,0 +1,793 @@
+/******************************************************************
+ システム名	：OpenOLAP Model Designer
+ ファイル名	：common.css
+ 作成		：
+ 修正履歴	：2004/11/25
+ 備考		：共通のスタイルシート
+			　（body、文字列、テーブル、div、input系など）
+******************************************************************/
+
+/********************* BODY *********************/
+body { 
+	background-color : white;
+	margin : 0;
+}
+
+body,div {
+	scrollbar-face-color: #BBF797;
+ 	scrollbar-highlight-color: #ABE887;
+	scrollbar-shadow-color: #FFFFFF;
+	scrollbar-darkshadow-color: #82C55B;
+	scrollbar-arrow-color: #4F8F28;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-track-color: #F4F3EE;
+}
+
+
+
+/********************* 文字関連 *********************/
+/* 文字共通 */
+body,tr,th,td {
+	 font-family : 'MS UI Gothic', serif;
+	font-weight : normal;
+	font-size : x-small;
+	color : black;
+}
+
+select,input,textarea {
+	font-family : 'MS UI Gothic', serif;
+	font-size : x-small;
+}
+
+/********************* 配置関連（DIV） *********************/
+
+/* 表示領域メイン用D */
+div.main {
+}
+
+/* コマンドボタン用 （div.main内で使用）*/
+div.command {
+	text-align : center;
+	margin : 10px;
+}
+
+/********************* ページヘッダー *********************/
+.Header
+{
+	width:100%;
+	border-collapse:collapse;
+	margin:0;
+}
+
+.HeaderTitleLeft
+{
+	background:url('../../images/title_l.gif') no-repeat;
+	width:26px;
+	height:36px;
+	padding:0;
+}
+
+.HeaderTitleCenter
+{
+	background:url('../../images/title.gif') repeat-x;
+	color:white;
+	font-weight:bold;
+	font-size:14px;
+	font-weight:bold;
+	padding-top:12px;
+}
+
+.HeaderTitleRight
+{
+	background:url('../../images/title.gif') repeat-x;
+	color:white;
+	border:none;
+	padding-top:12px;
+	width:50px;
+	text-align:right;
+}
+
+
+/********************* 標準テーブル *********************/
+
+/*　表　*/
+table.standard {
+	width : 640px;
+	margin : 0px 0px 20px 0px;
+	border-spacing : 2;
+
+}
+
+/*　表項目　*/
+th.standard,th.standard_top,th.standard_null {
+	text-align : left;
+	background-color :#C6EE96;
+	color : black;
+	font-weight: bold;
+	border-color : gray;
+	border-width : 1px;
+	border-style : solid;
+	padding : 2px 2px 2px 5px;
+	white-space: nowrap;
+}
+
+th.standard_top {
+	border-width : 1 1 0 1;
+}
+
+th.standard_null {
+	border-width : 0 1 0 1;
+}
+
+/*　表項目中央揃え　*/
+th.standard_center {
+	text-align : center;
+	background-color :#C6EE96;
+	color : black;
+	font-weight: bold;
+	border-color : gray;
+	border-width : 1px;
+	border-style : solid;
+	padding : 2px 2px 2px 5px;
+	white-space: nowrap;
+}
+/*　表データ（左揃え）　*/
+td.standard,td.standard_top,td.standard_null {
+	text-aliign : left;
+	background-color : #EBF8DC;
+	color : black;
+	border-color : gray;
+	border-width : 1px;
+	border-style : solid;
+	padding : 0px 0px 0px 2px;
+	white-space: nowrap;
+}
+
+/*　表データ（中央揃え）　*/
+td.standard_center,td.standard_top_center {
+	text-align : center;
+	background-color : #EBF8DC;
+	color : black;
+	border-color : gray;
+	border-width : 1px;
+	border-style : solid;
+	padding : 0px 0px 0px 2px;
+}
+
+/*　表データ（右揃え）　*/
+td.standard_right,td.standard_top_right {
+	text-align : right;
+	background-color : #EBF8DC;
+	color : black;
+	border-color : gray;
+	border-width : 1px;
+	border-style : solid;
+	padding : 0px 0px 0px 2px;
+}
+
+/********************* 大枠（タブ本体部分）用テーブル *********************/
+table.frame {
+	width : 100%;
+	height : 100%;
+	margin : 0;
+	border-style : none;
+	border-collapse:collapse;
+/*	background-color:#F4FCF1;*/
+	background-color:white;
+}
+
+td.left_top {
+	width : 7px;
+	height : 8px;
+	margin : 0;
+	padding : 0;
+	background-color:white;
+}
+
+td.top {
+	margin : 0;
+	padding : 0;
+}
+
+td.right_top {
+	width : 9px;
+	margin : 0;
+	padding : 0;
+}
+
+td.left {
+	width : 7px;
+	margin : 0;
+	padding : 0;
+	border-style : none;
+	background-color:white;
+}
+
+td.main {
+	margin : 0;
+	padding : 20px 0px 0px 0px;
+	border-style : none;
+	text-align : center;
+	vertical-align : top;
+}
+
+td.main_mlink_chart {
+	margin : 0;
+	padding : 20px 0px 0px 0px;
+	border-style : none;
+	text-align : right;
+	vertical-align: top;
+}
+
+td.right {
+	margin : 0;
+	padding : 0;
+	border-style : none;
+}
+
+td.left_bottom {
+	width : 7px;
+	height : 8px;
+	margin : 0;
+	padding : 0;
+	background-color:white;
+}
+
+td.bottom {
+	margin : 0;
+	padding : 0;
+}
+
+td.right_bottom {
+	margin : 0;
+	padding : 0;
+}
+
+/********************* レイアウト用テーブル *********************/
+table.layout {
+	margin : 20px;
+}
+
+/********************* リンク *********************/
+a {
+	text-decoration : none;
+}
+
+/********************* select *********************/
+select {
+	margin : 0px 10px 0px 0px；
+}
+
+/********************* ボタン *********************/
+
+/* 作成 */
+input.normal_create, input.up_create, input.out_create{
+	width : 106;
+	height : 44;
+	background : url("../../images/button/create.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_create, input.down_create{
+	width : 106;
+	height : 44;
+	background : url("../../images/button/create_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 更新 */
+input.normal_update, input.up_update, input.out_update{
+	width : 106;
+	height : 44;
+	background : url("../../images/button/update.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_update, input.down_update{
+	width : 106;
+	height : 44;
+	background : url("../../images/button/update_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 削除 */
+input.normal_delete, input.up_delete, input.out_delete{
+	width : 106;
+	height : 44;
+	background : url("../../images/button/delete.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_delete, input.down_delete{
+	width : 106;
+	height : 44;
+	background : url("../../images/button/delete_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 実行 */
+input.normal_go, input.up_go, input.out_go{
+	width : 50;
+	height : 20;
+	background : url("../../images/button/go.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_go, input.down_go{
+	width : 50;
+	height : 20;
+	background : url("../../images/button/go_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 戻る */
+input.normal_back, input.up_back, input.out_back {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/back.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_back, input.down_back {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/back_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 閉じる */
+input.normal_close, input.up_close, input.out_close {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/close.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_close, input.down_close {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/close_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 追加≫ */
+input.normal_add, input.up_add, input.out_add{
+	width : 90;
+	height : 20;
+	background : url("../../images/button/add.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_add, input.down_add{
+	width : 90;
+	height : 20;
+	background : url("../../images/button/add_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* ≪削除 */
+input.normal_remove, input.up_remove, input.out_remove {
+	width : 90;
+	height : 20;
+	background : url("../../images/button/remove.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_remove, input.down_remove {
+	width : 90;
+	height : 20;
+	background : url("../../images/button/remove_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 保存 */
+input.normal_save, input.up_save, input.out_save {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/save.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_save, input.down_save {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/save_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* OK */
+input.normal_ok, input.up_ok, input.out_ok {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/ok.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_ok, input.down_ok {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/ok_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* キャンセル */
+input.normal_cancel, input.up_cancel, input.out_cancel {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/cancel.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_cancel, input.down_cancel {
+	width : 106;
+	height : 44;
+	background : url("../../images/button/cancel_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* ▲ */
+input.normal_up, input.up_up, input.out_up {
+	width : 20;
+	height : 20;
+	background : url("../../images/button/up.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_up, input.down_up {
+	width : 20;
+	height : 20;
+	background : url("../../images/button/up_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* ▼ */
+input.normal_down, input.up_down, input.out_down {
+	width : 20;
+	height : 20;
+	background : url("../../images/button/down.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_down, input.down_down {
+	width : 20;
+	height : 20;
+	background : url("../../images/button/down_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 追加（ミニサイズ） */
+input.normal_add_mini, input.up_add_mini, input.out_add_mini {
+	width : 68;
+	height : 38;
+	background : url("../../images/button/add_mini.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_add_mini, input.down_add_mini {
+	width : 68;
+	height : 38;
+	background : url("../../images/button/add_mini_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 削除（ミニサイズ） */
+input.normal_delete_mini, input.up_delete_mini, input.out_delete_mini {
+	width : 68;
+	height : 38;
+	background : url("../../images/button/delete_mini.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_delete_mini, input.down_delete_mini {
+	width : 68;
+	height : 38;
+	background : url("../../images/button/delete_mini_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* SQLビューア */
+input.normal_sql, input.up_sql, input.out_sql {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/sql.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_sql, input.down_sql {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/sql_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* レベル作成 */
+input.normal_level, input.up_level, input.out_level {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/level.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_level, input.down_level {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/level_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 編集 */
+input.normal_edit, input.up_edit, input.out_edit {
+	width : 50;
+	height : 20;
+	background : url("../../images/button/edit_mini.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_edit, input.down_edit {
+	width : 50;
+	height : 20;
+	background : url("../../images/button/edit_mini_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* ﾃﾞｨﾒﾝｼｮﾝの削除 */
+input.normal_del_dim, input.up_del_dim, input.out_del_dim {
+	width : 148;
+	height : 38;
+	background : url("../../images/button/del_dim.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_del_dim, input.down_del_dim {
+	width : 148;
+	height : 38;
+	background : url("../../images/button/del_dim_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 同期を取る */
+input.normal_synchro, input.up_synchro, input.out_synchro {
+	width : 136;
+	height : 44;
+	background : url("../../images/button/synchro.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_synchro, input.down_synchro {
+	width : 136;
+	height : 44;
+	background : url("../../images/button/synchro_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* キャンセル（ミニ：ウィザードで使用） */
+input.normal_cancel_mini, input.up_cancel_mini, input.out_cancel_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/cancel_mini.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_cancel_mini, input.down_cancel_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/cancel_mini_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* OK */
+input.normal_ok_mini, input.up_ok_mini, input.out_ok_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/ok_mini_l.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_ok_mini, input.down_ok_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/ok_mini_l_r.gif") no-repeat;
+	border-style : none;
+}
+
+
+/* 次へ≫（ウィザードで使用） */
+input.normal_next, input.up_next, input.out_next {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/next.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_next, input.down_next {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/next_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* ≪戻る（ウィザードで使用） */
+input.normal_back_mini, input.up_back_mini, input.out_back_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/back_mini.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_back_mini, input.down_back_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/back_mini_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 完了（ウィザードで使用） */
+input.normal_finish, input.up_finish, input.out_finish {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/finish.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_finish, input.down_finish {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/finish_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 新規作成（ミニ） */
+input.normal_create_mini, input.up_create_mini, input.out_create_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/create_mini.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_create_mini, input.down_create_mini {
+	width : 108;
+	height : 38;
+	background : url("../../images/button/create_mini_r.gif") no-repeat;
+	border-style : none;
+}
+/* 表示（ミニ） */
+input.normal_display_mini, input.up_display_mini, input.out_display_mini {
+	width : 68;
+	height : 38;
+	background : url("../../images/button/display_mini.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_display_mini, input.down_display_mini {
+	width : 68;
+	height : 38;
+	background : url("../../images/button/display_mini_r.gif") no-repeat;
+	border-style : none;
+}
+
+/* 表示（ミニ） */
+input.normal_delete_mapping, input.up_delete_mapping, input.out_delete_mapping {
+	width : 148;
+	height : 38;
+	background : url("../../images/button/delete_mapping.gif") no-repeat;
+	border-style : none;
+}
+
+input.over_delete_mapping, input.down_delete_mapping {
+	width : 148;
+	height : 38;
+	background : url("../../images/button/delete_mapping_r.gif") no-repeat;
+	border-style : none;
+}
+
+
+
+/********************* テキストボックス *********************/
+input.text_right {
+	text-align : right;
+}
+
+/********************* レポート 用 *********************/
+td.standard_top,td.standard_top_center,td.standard_top_right {
+	border-width : 1 1 0 1;
+}
+
+td.standard_null {
+	border-width : 0 1 0 1;
+}
+
+/********************* img ***************************/
+img {
+	border-style : none;
+}
+
+/********************* メッセージ用フォント ***************************/
+span.msg {
+	font-family : 'MS UI Gothic', serif ;
+	font-weight : bold;
+	font-size : x-small;
+	color : black;
+}
+
+/********************* リンク図形 ***************************/
+v\:*
+{
+	behavior: url(#default#VML);
+}
+
+.TableObj
+{
+	width : 150px;
+	border-collapse : collapse;
+	border-right :2 solid #0e559c;
+	border-bottom : 2 solid #0e559c;
+}
+
+.TableNameDim,.TableNameTime,.TableNameFact,.TableNameSum,.TableNameLevel
+{
+	text-align : left;
+	border : 1 solid #608ca8;
+	border-bottom : 3 double #0e559c;
+	color:#0e559c;
+	font-weight : bold;
+	padding:2;
+	padding-left : 20px;
+}
+
+.TableNameDim
+{
+	background : url("../../images/Dimension1.gif") no-repeat #e1eafb;
+}
+
+.TableNameTime
+{
+	background : url("../../images/TimeDimension1.gif") no-repeat #ddffee;
+}
+
+.TableNameFact
+{
+	background : url("../../images/Measure1.gif") no-repeat #ffffdd;
+}
+
+.TableNameSum
+{
+	background : url("../../images/sum.gif") no-repeat #ddddff;
+}
+
+.TableNameLevel
+{
+	background : url("../../images/Hierarchy1.gif") no-repeat #ffeedd;
+}
+
+.TableColDim,.TableColTime,.TableColFact,.TableColLevel
+{
+	padding:1;
+	border : 1 solid #0e559c;
+}
+
+.TableColDim,
+{
+	background-color : #f0f4fd;
+}
+
+.TableColTime,
+{
+	background-color : #eefff7;
+}
+
+.TableColFact
+{
+	background-color : #ffffee;
+}
+
+.TableColLevel
+{
+	background-color : #fff7ee;
+}
+
+
+/* キャプション*/
+caption {
+	text-align : left;
+	padding : 0px 0px 2px 0px;
+}

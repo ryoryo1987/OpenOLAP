@@ -1,0 +1,24 @@
+/******************************************************************
+ システム名	：OpenOLAP
+ ファイル名	：report.css
+ 作成		：
+ 修正履歴	：----/--/--
+ 備考		：Reports用スタイルシート
+			　（Cube Managerで使用）
+******************************************************************/
+
+/*　表　*/
+table.standard_report {
+	width : 80%;
+	border-collapse:collapse;
+	margin : 0px 20px 20px 20px;
+	border : 1 gray solid;
+}
+
+/*　表項目　*/
+th,td {
+	font-size : 11px;
+}
+
+
+

@@ -1,0 +1,286 @@
+/********************* ポータルウィンドウ *********************/
+.window_title_left_1,.window_title_left_2,.window_title_left_3,.window_title_left_4,.window_title_left_5
+{
+	width:11;
+	height:28;
+	display:inline;
+}
+
+.window_title_left_1
+{
+	background:url('../images/portal/window_title_left_1.gif') no-repeat;
+}
+
+.window_title_left_2
+{
+	background:url('../images/portal/window_title_left_2.gif') no-repeat;
+}
+
+.window_title_left_3
+{
+	background:url('../images/portal/window_title_left_3.gif') no-repeat;
+}
+
+.window_title_left_4
+{
+	background:url('../images/portal/window_title_left_4.gif') no-repeat;
+}
+
+.window_title_left_5
+{
+	background:url('../images/portal/window_title_left_5.gif') no-repeat;
+}
+
+.window_title_name_1,.window_title_button_1,.window_title_name_2,.window_title_button_2,
+.window_title_name_3,.window_title_button_3,.window_title_name_4,.window_title_button_4,
+.window_title_name_5,.window_title_button_5
+{
+	height:28;
+	display:inline;
+	font-weight:bold;
+	color:white;
+}
+
+.window_title_name_1,.window_title_button_1
+{
+	background:url('../images/portal/window_title_name_1.gif') repeat-x;
+}
+
+.window_title_name_2,.window_title_button_2
+{
+	background:url('../images/portal/window_title_name_2.gif') repeat-x;
+	color:#333333
+}
+
+.window_title_name_3,.window_title_button_3
+{
+	background:url('../images/portal/window_title_name_3.gif') repeat-x;
+}
+
+.window_title_name_4,.window_title_button_4
+{
+	background:url('../images/portal/window_title_name_4.gif') repeat-x;
+}
+
+.window_title_name_5,.window_title_button_5
+{
+	background:url('../images/portal/window_title_name_5.gif') repeat-x;
+}
+
+.window_title_name_1,.window_title_name_2,.window_title_name_3,.window_title_name_4,
+.window_title_name_5
+{
+	padding-top:9;
+}
+
+.window_title_button_1,.window_title_button_2,.window_title_button_3,.window_title_button_4,
+.window_title_button_5
+{
+	padding-top:6;
+	width:40;
+	text-align:center;
+}
+
+.window_title_right_1,.window_title_right_2,.window_title_right_3,.window_title_right_4,
+.window_title_right_5
+{
+	display:inline;
+	width:6;
+	height:28;
+}
+
+.window_title_right_1
+{
+	background:url('../images/portal/window_title_right_1.gif') no-repeat;
+}
+
+.window_title_right_2
+{
+	background:url('../images/portal/window_title_right_2.gif') no-repeat;
+}
+
+.window_title_right_3
+{
+	background:url('../images/portal/window_title_right_3.gif') no-repeat;
+}
+
+.window_title_right_4
+{
+	background:url('../images/portal/window_title_right_4.gif') no-repeat;
+}
+
+.window_title_right_5
+{
+	background:url('../images/portal/window_title_right_5.gif') no-repeat;
+}
+
+.window_contents_frame_1,.window_contents_frame_2,.window_contents_frame_3,.window_contents_frame_4,
+.window_contents_frame_5
+{
+	display:inline;
+	width:5;
+	height:100%;
+}
+
+.window_contents_frame_1
+{
+	background:url('../images/portal/window_contents_frame_1.gif') repeat-y;
+}
+
+.window_contents_frame_2
+{
+	background:url('../images/portal/window_contents_frame_2.gif') repeat-y;
+}
+
+.window_contents_frame_3
+{
+	background:url('../images/portal/window_contents_frame_3.gif') repeat-y;
+}
+
+.window_contents_frame_4
+{
+	background:url('../images/portal/window_contents_frame_4.gif') repeat-y;
+}
+
+.window_contents_frame_5
+{
+	background:url('../images/portal/window_contents_frame_5.gif') repeat-y;
+}
+
+.window_contents_center
+{
+	display:inline;
+	background-color:white;
+	height:100%;
+	overflow:auto;
+}
+
+.window_footer_left_1,.window_footer_left_2,.window_footer_left_3,.window_footer_left_4,
+.window_footer_left_5,
+.window_footer_left_nopage_4
+
+{
+	display:inline;
+	width:5;
+	height:24;
+}
+
+.window_footer_left_1
+{
+	background:url('../images/portal/window_footer_left_1.gif') no-repeat;
+}
+
+.window_footer_left_2
+{
+	background:url('../images/portal/window_footer_left_2.gif') no-repeat;
+}
+
+.window_footer_left_3
+{
+	background:url('../images/portal/window_footer_left_3.gif') no-repeat;
+}
+
+.window_footer_left_4
+{
+	background:url('../images/portal/window_footer_left_4.gif') no-repeat;
+}
+
+.window_footer_left_5
+{
+	background:url('../images/portal/window_footer_left_5.gif') no-repeat;
+}
+
+.window_footer_left_nopage_4
+{
+	background:url('../images/portal/window_footer_left_nopage_4.gif') no-repeat;
+}
+
+
+.window_footer_center_1,.window_footer_center_2,.window_footer_center_3,.window_footer_center_4,
+.window_footer_center_5
+{
+	display:inline;
+	height:24;
+	padding-top:6;
+	color:white;
+}
+
+.window_footer_center_1
+{
+	background:url('../images/portal/window_footer_center_1.gif') repeat-x;
+}
+
+.window_footer_center_2
+{
+	background:url('../images/portal/window_footer_center_2.gif') repeat-x;
+	color:#333333;
+}
+
+.window_footer_center_3
+{
+	background:url('../images/portal/window_footer_center_3.gif') repeat-x;
+}
+
+.window_footer_center_4
+{
+	background:url('../images/portal/window_footer_center_4.gif') repeat-x;
+}
+
+.window_footer_center_5
+{
+	background:url('../images/portal/window_footer_center_5.gif') repeat-x;
+}
+
+.window_footer_right_1,.window_footer_right_2,.window_footer_right_3,.window_footer_right_4,
+.window_footer_right_5,
+.window_footer_right_nomark_4
+{
+	display:inline;
+	width:22;
+	height:24;
+}
+
+.window_footer_right_1
+{
+	background:url('../images/portal/window_footer_right_1.gif') no-repeat;
+}
+
+.window_footer_right_2
+{
+	background:url('../images/portal/window_footer_right_2.gif') no-repeat;
+}
+
+.window_footer_right_3
+{
+	background:url('../images/portal/window_footer_right_3.gif') no-repeat;
+}
+
+.window_footer_right_4
+{
+	background:url('../images/portal/window_footer_right_4.gif') no-repeat;
+}
+
+.window_footer_right_5
+{
+	background:url('../images/portal/window_footer_right_5.gif') no-repeat;
+}
+
+.window_footer_right_nomark_4
+{
+	background:url('../images/portal/window_footer_right_nomark_4.gif') no-repeat;
+}
+
+
+a{ text-decoration:none;}
+a.active_1:visited		{color:white;}
+a.active_1:link			{color:white;}
+a.active_1:active		{color:#FF3366;}
+a.active_1:hover		{color:#FF6699;}
+
+
+a.active_2:visited		{color:#333333;}
+a.active_2:link			{color:#333333;}
+a.active_2:active		{color:#FF3366;}
+a.active_2:hover		{color:#FF6699;}
+
+

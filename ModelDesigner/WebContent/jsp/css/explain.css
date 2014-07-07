@@ -1,0 +1,106 @@
+/******************************************************************
+ システム名	：OpenOLAP
+ ファイル名	：explain.css
+ 作成		：
+ 修正履歴	：----/--/--
+ 備考		：初期説明画面用スタイルシート
+******************************************************************/
+
+/********************* BODY *********************/
+body {
+	background : url("../../images/olap_image.jpg") white no-repeat 100% 100% fixed;
+	color : black ;
+	/*font-family : 'Arial', selif ;*/					/* English*/
+	font-family : 'MS UI Gothic', selif ;		/* Japanese*/
+	font-weight : normal;
+	font-size : x-small;
+	text-align : center;
+	margin : 0;
+	
+}
+
+/********************* 配置関連（DIV） *********************/
+/* タイトル →移行が終わったら削除*/
+div.title {
+	width : 100%;
+	height : 50px;
+	background:url(../../images/title.gif) repeat-x;
+	text-align : left;
+/*	padding : 10px 0px 0px 20px;*/
+	margin : 0px 0px 20px 0px;
+}
+		table.title
+		{
+			width:100%;
+			height:50px;
+			border-collapse:collapse;
+			margin:0 0 20 0;
+			background:url(../images/title.gif) repeat-x;
+		}
+		td.title
+		{
+			padding:0;
+			vertical-align:top;
+		}
+		td.logout
+		{
+			text-align:right;
+			vertical-align:top;
+			padding-top:12;
+			font-size:12px;
+		}
+		a.logout
+		{
+			color:white;
+			text-decoration:underline;
+		}
+		
+		a.logout:hover
+		{
+			color:orange;
+			background-color:transparent;
+		}
+
+/* タイトル以下の部分 */
+div.content {
+	width : 90%;
+}
+
+/********************* 文字 *********************/
+/* タイトル */
+h1 {
+	font-size : medium;
+	color : white;
+}
+
+/* 説明文章の段落*/
+p {
+	width : 100%;
+	text-align : left;
+	line-height : 1.2em;
+	margin : 20px;
+}
+
+/********************* リスト *********************/
+ul {
+	text-align : left;
+}
+
+li.item {
+	margin : 0px 0px 0em 1em;
+	list-style-image : url("../../images/list.gif");
+}
+
+li.exp {
+	margin : 0px 0px 0.5em 1.5em;
+	list-style : none;
+}
+
+/********************* リンク *********************/
+a {
+	text-decoration : none;
+}
+a:hover {
+	color : white ;
+	background-color : blue 
+}
