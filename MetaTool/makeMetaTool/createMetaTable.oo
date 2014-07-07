@@ -1,0 +1,796 @@
+set search_path to %schema%,public
+/
+
+CREATE TABLE %schema%.oo_meta_info (
+       version              VARCHAR(512)
+)
+/
+INSERT INTO %schema%.oo_meta_info values('2.1.0')
+/
+
+CREATE TABLE %schema%.oo_user (
+       user_seq             INTEGER NOT NULL,
+       name                 VARCHAR(100),
+       comment              VARCHAR(512),
+       table_flg            VARCHAR(1),
+       view_flg             VARCHAR(1)
+)
+/
+
+ALTER TABLE %schema%.oo_user ADD CONSTRAINT oo_user_pk UNIQUE (user_seq)
+/
+
+INSERT INTO %schema%.oo_user values(1,'public','','1','1')
+/
+
+CREATE TABLE %schema%.oo_dimension (
+       dimension_seq        INTEGER NOT NULL,
+       name                 VARCHAR(100),
+       comment              VARCHAR(512),
+       dim_type             VARCHAR(1),
+       total_flg            VARCHAR(1),
+       sort_type            VARCHAR(1),
+       sort_order           VARCHAR(1),
+       seg_datatype         VARCHAR(1),
+       other_member_flg     VARCHAR(1),
+       user_seq             INTEGER
+)
+/
+
+ALTER TABLE %schema%.oo_dimension ADD CONSTRAINT oo_dimension_pk UNIQUE (dimension_seq)
+/
+
+CREATE TABLE %schema%.oo_dimension_part (
+       dimension_seq              INTEGER NOT NULL,
+       part_seq                   INTEGER NOT NULL,
+       name                       VARCHAR(100),
+       comment                    VARCHAR(512),
+       part_type                  VARCHAR(1),
+       add_member_flg             INTEGER,
+       rename_member_flg          INTEGER,
+       delete_member_flg          INTEGER
+)
+/
+ALTER TABLE %schema%.oo_dimension_part ADD CONSTRAINT oo_dimension_part_pk UNIQUE (dimension_seq,part_seq)
+/
+
+CREATE TABLE %schema%.oo_time (
+       time_seq             INTEGER NOT NULL,
+       name                 VARCHAR(100),
+       comment              VARCHAR(512),
+       start_month          VARCHAR(2),
+       default_flg          VARCHAR(1),
+       total_flg            VARCHAR(1),
+       year_flg             VARCHAR(1),
+       year_long_name       VARCHAR(2),
+       year_short_name      VARCHAR(2),
+       half_flg             VARCHAR(1),
+       half_long_name       VARCHAR(2),
+       half_short_name      VARCHAR(2),
+       quarter_flg          VARCHAR(1),
+       quarter_long_name    VARCHAR(2),
+       quarter_short_name   VARCHAR(2),
+       month_flg            VARCHAR(1),
+       month_long_name      VARCHAR(2),
+       month_short_name     VARCHAR(2),
+       week_flg             VARCHAR(1),
+       week_kind_flg        VARCHAR(1),
+       week_long_name       VARCHAR(2),
+       week_short_name      VARCHAR(2),
+       day_flg              VARCHAR(1),
+       day_long_name        VARCHAR(2),
+       day_short_name       VARCHAR(2),
+       time_length          INTEGER,
+       time_past_span       INTEGER,
+       time_future_span     INTEGER
+)
+/
+
+ALTER TABLE %schema%.oo_time ADD CONSTRAINT oo_time_pk UNIQUE (time_seq)
+/
+
+CREATE TABLE %schema%.oo_level (
+       level_seq            INTEGER NOT NULL,
+       dimension_seq        INTEGER,
+       level_no             INTEGER,
+       name                 VARCHAR(100),
+       comment              VARCHAR(512),
+       table_name           VARCHAR(30),
+       long_name_col        VARCHAR(30),
+       short_name_col       VARCHAR(30),
+       sort_col             VARCHAR(30),
+       key_col1             VARCHAR(30),
+       key_col2             VARCHAR(30),
+       key_col3             VARCHAR(30),
+       key_col4             VARCHAR(30),
+       key_col5             VARCHAR(30),
+       link_col1            VARCHAR(30),
+       link_col2            VARCHAR(30),
+       link_col3            VARCHAR(30),
+       link_col4            VARCHAR(30),
+       link_col5            VARCHAR(30),
+       where_clause         VARCHAR(512)
+)
+/
+
+
+ALTER TABLE %schema%.oo_level ADD CONSTRAINT oo_level_pk UNIQUE (level_seq)
+/
+
+CREATE TABLE %schema%.oo_level_chart (
+       level_seq            INTEGER NOT NULL,
+       dimension_seq        INTEGER,
+       x_point              INTEGER,
+       y_point              INTEGER
+)
+/
+
+ALTER TABLE %schema%.oo_level_chart ADD CONSTRAINT oo_level_chart_pk UNIQUE (level_seq)
+/
+
+CREATE TABLE %schema%.oo_measure (
+       measure_seq       INTEGER NOT NULL,
+       name              VARCHAR(100),
+       comment           VARCHAR(512),
+       fact_table        VARCHAR(30),
+       fact_col          VARCHAR(30),
+       fact_calc_method  INTEGER,
+       fact_where_clause VARCHAR(512),
+       time_dim_flg      VARCHAR(1),
+       time_col          VARCHAR(30),
+       time_format       VARCHAR(512),
+       user_seq          INTEGER
+)
+/
+ALTER TABLE %schema%.oo_measure ADD CONSTRAINT oo_measure_pk UNIQUE (measure_seq)
+/
+
+CREATE TABLE %schema%.oo_measure_link (
+       measure_seq          INTEGER NOT NULL,
+       dimension_seq        INTEGER NOT NULL,
+       fact_link_col1       VARCHAR(30),
+       fact_link_col2       VARCHAR(30),
+       fact_link_col3       VARCHAR(30),
+       fact_link_col4       VARCHAR(30),
+       fact_link_col5       VARCHAR(30)
+)
+/
+
+ALTER TABLE %schema%.oo_measure_link ADD CONSTRAINT oo_measure_link_pk UNIQUE (measure_seq,dimension_seq)
+/
+
+CREATE TABLE %schema%.oo_measure_chart (
+       measure_seq          INTEGER NOT NULL,
+       object_type          VARCHAR(1) NOT NULL,
+       dimension_seq        INTEGER,
+       x_point              VARCHAR(30),
+       y_point              VARCHAR(30)
+)
+/
+ALTER TABLE %schema%.oo_measure_chart ADD CONSTRAINT oo_measure_chart_pk UNIQUE (measure_seq,dimension_seq)
+/
+
+CREATE TABLE %schema%.oo_cube (
+       cube_seq             INTEGER NOT NULL,
+       name                 VARCHAR(100),
+       comment              VARCHAR(512),
+       record_count         INTEGER
+)
+/
+
+ALTER TABLE %schema%.oo_cube ADD CONSTRAINT oo_cube_pk UNIQUE (cube_seq)
+/
+
+CREATE TABLE %schema%.oo_cube_structure (
+       cube_seq             INTEGER NOT NULL,
+       time_dim_flg         VARCHAR(1),
+       dimension_seq        INTEGER NOT NULL,
+       measure_seq          INTEGER NOT NULL,
+       part_seq             INTEGER NOT NULL,
+       dimension_no         INTEGER
+)
+/
+
+ALTER TABLE %schema%.oo_cube_structure ADD CONSTRAINT oo_cube_structure_pk UNIQUE (cube_seq,dimension_seq,measure_seq,part_seq)
+/
+
+CREATE TABLE %schema%.oo_custom_sql(
+cube_seq INTEGER NOT NULL
+,step INTEGER NOT NULL
+,script TEXT
+)
+/
+ALTER TABLE %schema%.oo_custom_sql ADD CONSTRAINT oo_custom_sql_pk UNIQUE (cube_seq,step)
+/
+
+CREATE TABLE %schema%.oo_job (
+       job_seq              INTEGER NOT NULL,
+       cube_seq             INTEGER,
+       process              VARCHAR(128),
+       session_id           VARCHAR(512),
+       time                 TIMESTAMP,
+       status               VARCHAR(1),
+       stop_flg             VARCHAR(1)
+)
+/
+ALTER TABLE %schema%.oo_job ADD CONSTRAINT oo_job_pk UNIQUE (job_seq)
+/
+
+CREATE TABLE %schema%.oo_formula (
+       formula_seq          INTEGER NOT NULL,
+       cube_seq             INTEGER,
+       name                 VARCHAR(100),
+       comment              VARCHAR(512),
+       data_flg             VARCHAR(1),
+       formula_text         TEXT
+)
+/
+ALTER TABLE %schema%.oo_formula ADD CONSTRAINT oo_formula_pk UNIQUE (formula_seq)
+/
+
+CREATE TABLE %schema%.oo_info_cube (
+       cube_seq             INTEGER NOT NULL,
+       custmized_flg        VARCHAR(1),
+       last_update          TIMESTAMP,
+       record_count         VARCHAR(100)
+)
+/
+ALTER TABLE %schema%.oo_info_cube ADD CONSTRAINT oo_info_cube_pk UNIQUE (cube_seq)
+/
+
+CREATE TABLE %schema%.oo_info_mes (
+       cube_seq             INTEGER NOT NULL,
+       measure_seq          INTEGER NOT NULL,
+       mes_type             VARCHAR(1)
+)
+/
+ALTER TABLE %schema%.oo_info_mes ADD CONSTRAINT oo_info_mes_pk UNIQUE (cube_seq,measure_seq)
+/
+
+CREATE TABLE %schema%.oo_info_dim (
+       cube_seq             INTEGER NOT NULL,
+       dimension_seq        INTEGER NOT NULL,
+       part_seq             INTEGER,
+       dim_no               INTEGER,
+       level_count          INTEGER,
+       time_dim_flg         VARCHAR(1)
+)
+/
+ALTER TABLE %schema%.oo_info_dim ADD CONSTRAINT oo_info_dim_pk UNIQUE (cube_seq,dimension_seq)
+/
+
+
+
+
+
+create table oo_dim_0_0(
+KEY             integer,
+PAR_KEY         integer,
+COL_1           VARCHAR(100),
+COL_2           VARCHAR(100),
+COL_3           VARCHAR(100),
+COL_4           VARCHAR(100),
+COL_5           VARCHAR(100),
+COL_6           VARCHAR(100),
+SORT_COL        VARCHAR(512),
+CODE            VARCHAR(512),
+Short_Name      VARCHAR(512),
+Long_Name       VARCHAR(512),
+calc_text       VARCHAR(512),
+time_date       date,
+org_level       numeric(2),
+cust_LEVEL      numeric(2),
+LEVEL           integer,
+leaf_flg        char(1),
+KIND_FLG        CHAR(1),
+NAME_UPDATE_FLG CHAR(1),
+MIN_VAL         numeric,
+MAX_VAL         numeric,
+rownum          integer)
+/
+
+
+CREATE TABLE %schema%.oo_calc_method(
+       method_no    INTEGER NOT NULL,
+       method_name  VARCHAR(30),
+       method_sql   VARCHAR(512),
+       method_sql2   VARCHAR(512)
+)
+/
+
+ALTER TABLE %schema%.oo_calc_method ADD CONSTRAINT oo_calc_method_pk UNIQUE (method_no)
+/
+
+INSERT INTO %schema%.oo_calc_method (method_no,method_name,method_sql,method_sql2) VALUES (1,'sum','SUM(%column%)','SUM(%column%)')
+/
+INSERT INTO %schema%.oo_calc_method (method_no,method_name,method_sql,method_sql2) VALUES (2,'avg','AVG(%column%)','AVG(%column%)')
+/
+INSERT INTO %schema%.oo_calc_method (method_no,method_name,method_sql,method_sql2) VALUES (3,'max','MAX(%column%)','MAX(%column%)')
+/
+INSERT INTO %schema%.oo_calc_method (method_no,method_name,method_sql,method_sql2) VALUES (4,'min','MIN(%column%)','MIN(%column%)')
+/
+INSERT INTO %schema%.oo_calc_method (method_no,method_name,method_sql,method_sql2) VALUES (5,'count','COUNT(%column%)','SUM(%column%)')
+/
+INSERT INTO %schema%.oo_calc_method (method_no,method_name,method_sql,method_sql2) VALUES (6,'first','TO_NUMBER(SUBSTRING(MIN(%time%||''-''||%column%) FROM 11),''9999999999999999'')','SUM(%column%)')
+/
+INSERT INTO %schema%.oo_calc_method (method_no,method_name,method_sql,method_sql2) VALUES (7,'last','TO_NUMBER(SUBSTRING(MAX(%time%||''-''||%column%) FROM 11),''9999999999999999'')','SUM(%column%)')
+/
+
+
+
+CREATE TABLE %schema%.oo_time_format (
+       time_kind_cd         VARCHAR(10) NOT NULL,
+       time_name_format_cd  VARCHAR(2) NOT NULL,
+       time_name            VARCHAR(64),
+       time_name_sql        VARCHAR(512)
+)
+/
+
+ALTER TABLE %schema%.oo_time_format ADD CONSTRAINT oo_time_format_pk UNIQUE (time_kind_cd,time_name_format_cd)
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('YEAR','01','YYYY年度','SUBSTR(YEAR_MC,1,4) || ''年度''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('YEAR','02','YYYY年','SUBSTR(YEAR_MC,1,4) || ''年''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('YEAR','03','YYYY','SUBSTR(YEAR_MC,1,4)')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('YEAR','04','YY年度','SUBSTR(YEAR_MC,3,2) || ''年度''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('YEAR','05','YY年','SUBSTR(YEAR_MC,3,2) || ''年''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('YEAR','06','YY','SUBSTR(YEAR_MC,3,2)')
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('HALF','01','YYYY年度 上期/下期','SUBSTR(HALF_MC,1,4) || ''年度 '' || CASE WHEN SUBSTR(HALF_MC,5,1)=''1'' THEN ''上期'' ELSE ''下期'' END')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('HALF','02','上期/下期','CASE WHEN SUBSTR(HALF_MC,5,1)=''1'' THEN ''上期'' ELSE ''下期'' END')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('HALF','03','YYYY年度 前期/後期','SUBSTR(HALF_MC,1,4) || ''年度 '' || CASE WHEN SUBSTR(HALF_MC,5,1)=''1'' THEN ''前期'' ELSE ''後期'' END')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('HALF','04','前期/後期','CASE WHEN SUBSTR(HALF_MC,5,1)=''1'' THEN ''前期'' ELSE ''後期'' END')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('HALF','05','YYYY H1/H2','SUBSTR(HALF_MC,1,4) || '' '' || CASE WHEN SUBSTR(HALF_MC,5,1)=''1'' THEN ''H1'' ELSE ''H2'' END')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('HALF','06','H1/H2','''H'' || SUBSTR(HALF_MC,5,1) ')
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('QUARTER','01','YYYY年度第n四半期','SUBSTR(QUARTER_MC,1,4) || ''年度第'' || SUBSTR(QUARTER_MC,5,1) || ''四半期''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('QUARTER','02','第n四半期','''第'' || SUBSTR(QUARTER_MC,5,1) || ''四半期''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('QUARTER','03','YYYY年度Qn','SUBSTR(QUARTER_MC,1,4) || ''年度Q'' || SUBSTR(QUARTER_MC,5,1)')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('QUARTER','04','Qn','''Q'' || SUBSTR(QUARTER_MC,5,1)')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('QUARTER','05','YYYYQn','SUBSTR(QUARTER_MC,1,4) || ''Q'' || SUBSTR(QUARTER_MC,5,1)')
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('MONTH','01','YYYY年MM月','SUBSTR(MONTH_MC,1,4) || ''年'' || SUBSTR(MONTH_MC,5,2) || ''月''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MONTH','02','MM月','SUBSTR(MONTH_MC,5,2) || ''月''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MONTH','03','YYYY年度MM月','SUBSTR(MONTH_MC,1,4) || ''年度'' || SUBSTR(MONTH_MC,5,2) || ''月''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MONTH','04','YYYY年度会計第MM月','SUBSTR(MONTH_MC,1,4) || ''年度会計第'' || SUBSTR(MONTH_MC,5,2) || ''月''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MONTH','05','YYYY/MM','TO_CHAR(TO_DATE(SUBSTR(MONTH_MC,1,6),''YYYYMM''),''YYYY/MM'') ')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MONTH','06','MM','SUBSTR(MONTH_MC,5,2)')
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_M','01','MM月第n週','TO_CHAR(TO_DATE(SUBSTR(KEY,1,6),''YYYYMM''),''MM'') || ''月第'' || SUBSTR(KEY,7,1) || ''週''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_M','02','第n週','''第'' || SUBSTR(KEY,7,1) || ''週''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_M','03','YYYY/MM/nW.','TO_CHAR(TO_DATE(SUBSTR(KEY,1,6),''YYYYMM''),''YYYY/MM'') || ''/'' || SUBSTR(KEY,7,1) || ''W.''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_M','04','W.n','''W.'' || SUBSTR(KEY,7,1)')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_M','05','MM/W.n','TO_CHAR(TO_DATE(SUBSTR(KEY,1,6),''YYYYMM''),''MM'') || ''/W.'' || SUBSTR(KEY,7,1)')
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_Y','01','YYYY年度第nn週','SUBSTR(KEY,1,4) || ''年度第'' || SUBSTR(KEY,5,2) || ''週''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_Y','02','第nn週','''第'' || SUBSTR(KEY,5,2) || ''週''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_Y','03','YYYY/nnW.','SUBSTR(KEY,1,4) || ''/'' || SUBSTR(KEY,5,2) || ''W.''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_Y','04','nnW.','SUBSTR(KEY,5,2) || ''W.''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_Y','05','YYYY/W.nn','SUBSTR(KEY,1,4) || ''/W.'' || SUBSTR(KEY,5,2)')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('WEEK_Y','06','W.nn','''W.'' || SUBSTR(KEY,5,2)')
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('DAY','01','DD日','SUBSTR(DAY_MC,7,2) || ''日''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('DAY','02','MM月DD日','SUBSTR(DAY_MC,5,2) || ''月'' || SUBSTR(DAY_MC,7,2) || ''日''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('DAY','03','YYYY年MM月DD日','SUBSTR(DAY_MC,1,4) || ''年'' || SUBSTR(DAY_MC,5,2) || ''月'' || SUBSTR(DAY_MC,7,2) || ''日''')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('DAY','04','DD','SUBSTR(DAY_MC,7,2)')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('DAY','05','MM/DD','SUBSTR(DAY_MC,5,2) || ''/'' || SUBSTR(DAY_MC,7,2)')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('DAY','06','YYYY/MM/DD','SUBSTR(DAY_MC,1,4) || ''/'' || SUBSTR(DAY_MC,5,2) || ''/'' || SUBSTR(DAY_MC,7,2)')
+/
+
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','01','YYYYMMDD varchar','TO_DATE(%object%,''YYYYMMDD'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','02','YYYY/MM/DD varchar','TO_DATE(%object%,''YYYY/MM/DD'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','03','YYYY-MM-DD varchar','TO_DATE(%object%,''YYYY-MM-DD'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','04','YYMMDD varchar','TO_DATE(%object%,''YYMMDD'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','05','YY/MM/DD varchar','TO_DATE(%object%,''YY/MM/DD'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','06','YY-MM-DD varchar','TO_DATE(%object%,''YY-MM-DD'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','07','YYYYMM varchar','TO_DATE(%object%,''YYYYMM'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','08','YYYY-MM varchar','TO_DATE(%object%,''YYYY-MM'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','09','YYMM varchar','TO_DATE(%object%,''YYMM'')')
+/
+INSERT INTO %schema%.oo_time_format VALUES ('MEASURE','10','YY-MM varchar','TO_DATE(%object%,''YY-MM'')')
+/
+
+
+
+CREATE SEQUENCE %schema%.oo_user_seq START 2
+/
+CREATE SEQUENCE %schema%.oo_dimension_seq
+/
+CREATE SEQUENCE %schema%.oo_level_seq
+/
+CREATE SEQUENCE %schema%.oo_measure_seq
+/
+CREATE SEQUENCE %schema%.oo_time_seq
+/
+CREATE SEQUENCE %schema%.oo_cube_seq
+/
+CREATE SEQUENCE %schema%.oo_job_seq
+/
+CREATE SEQUENCE %schema%.oo_wait_order
+/
+
+
+CREATE TABLE %schema%.oo_YEAR (
+       YEAR_MC              INTEGER NOT NULL,
+       YEAR_DATE            DATE NOT NULL
+)
+/
+
+ALTER TABLE %schema%.oo_YEAR
+       ADD CONSTRAINT oo_YEAR_PK PRIMARY KEY (YEAR_MC)
+/
+
+CREATE TABLE %schema%.oo_HALF (
+       HALF_MC              INTEGER NOT NULL,
+       YEAR_MC              INTEGER NOT NULL,
+       HALF_DATE            DATE NOT NULL
+)
+/
+
+ALTER TABLE %schema%.oo_HALF
+       ADD CONSTRAINT oo_HALF_PK PRIMARY KEY (HALF_MC)
+/
+
+CREATE TABLE %schema%.oo_QUARTER (
+       QUARTER_MC           INTEGER NOT NULL,
+       YEAR_MC              INTEGER NOT NULL,
+       HALF_MC              INTEGER NOT NULL,
+       QUARTER_DATE         DATE NOT NULL
+)
+/
+
+ALTER TABLE %schema%.oo_QUARTER
+       ADD CONSTRAINT oo_QUARTER_PK PRIMARY KEY (QUARTER_MC)
+/
+
+CREATE TABLE %schema%.oo_MONTH (
+       MONTH_MC             INTEGER NOT NULL,
+       MONTH_DATE           DATE NOT NULL
+)
+/
+
+ALTER TABLE %schema%.oo_MONTH
+       ADD CONSTRAINT oo_MONTH_PK PRIMARY KEY (MONTH_MC)
+/
+
+CREATE TABLE %schema%.oo_DAY (
+       DAY_MC               INTEGER NOT NULL,
+       DAY_DATE             DATE NOT NULL,
+       OFFDAY_FLG           CHAR(1) NULL
+)
+/
+
+ALTER TABLE %schema%.oo_DAY
+       ADD CONSTRAINT oo_DAY_PK PRIMARY KEY (DAY_MC)
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE %schema%.oo_v_user(
+ user_id			integer,                 -- ユーザーID
+ name				varchar(100),            -- ユーザー名
+ password			varchar(100),            -- パスワード
+ adminflg			varchar(1),              -- 管理者:1 一般User:2 ExportできないUser:3
+ export_file_type	varchar(100),            -- エクスポートタイプ(csv or XMLSpreadSheet)
+ color_style_id		char(1),
+ comment			varchar(512),            
+ attribute1			varchar(256),
+ attribute2			varchar(256),
+ attribute3			varchar(256),
+ attribute4			varchar(256),
+ attribute5			varchar(256),
+ attribute6			varchar(256),
+ attribute7			varchar(256),
+ attribute8			varchar(256),
+ attribute9			varchar(256),
+ attribute10		varchar(256),
+ attribute11		varchar(256),
+ attribute12		varchar(256),
+ attribute13		varchar(256),
+ attribute14		varchar(256),
+ attribute15		varchar(256)
+)
+/
+
+ALTER TABLE %schema%.oo_v_user ADD CONSTRAINT oo_v_user_pk UNIQUE (user_id)
+/
+
+INSERT INTO %schema%.oo_v_user(user_id,name,password,adminflg,export_file_type,color_style_id,comment) values(1,'admin','admin','1','XMLSpreadSheet','1','OpenOLAP Administrator')
+/
+INSERT INTO %schema%.oo_v_user(user_id,name,password,adminflg,export_file_type,color_style_id,comment) values(2,'user','user','2','CSV','1','Sample User')
+/
+INSERT INTO %schema%.oo_v_user(user_id,name,password,adminflg,export_file_type,color_style_id,comment) values(3,'guest','guest','3','CSV','1','Guest User')
+/
+
+create table %schema%.oo_v_group
+(group_id			integer,
+ name				varchar(100),
+ comment			varchar(512),
+ attribute1			varchar(256),
+ attribute2			varchar(256),
+ attribute3			varchar(256))
+/
+
+ALTER TABLE %schema%.oo_v_group ADD CONSTRAINT oo_v_group_pk UNIQUE (group_id)
+/
+
+INSERT INTO %schema%.oo_v_group(group_id,name,comment) values(1,'User_Group','Sample User Group')
+/
+
+create table %schema%.oo_v_user_group
+(user_id			integer,
+ group_id			integer)
+/
+
+INSERT INTO %schema%.oo_v_user_group values(2,1)
+/
+INSERT INTO %schema%.oo_v_user_group values(3,1)
+/
+
+ALTER TABLE %schema%.oo_v_user_group ADD CONSTRAINT oo_v_user_group_pk UNIQUE (user_id,group_id)
+/
+
+create table %schema%.oo_v_group_report
+(group_id			integer,
+ report_id			integer,
+ right_flg			char(1),--------------フォルダーの権限
+ export_flg			char(1),
+ att1_flg			char(1),
+ att2_flg			char(1),
+ att3_flg			char(1))
+/
+
+ALTER TABLE %schema%.oo_v_group_report ADD CONSTRAINT oo_v_group_report_pk UNIQUE (group_id,report_id)
+/
+
+CREATE TABLE %schema%.oo_v_report
+(report_id				integer,               -- レポートID
+ par_id					integer,               -- 親ID
+ report_name			varchar(100),          -- レポート名
+ cube_seq				integer,               -- cube_seq
+ update_date			date,                  -- レポート構成の最終更新日
+ kind_flg				varchar(1),            -- R:Report  F:Folder
+ level					integer,               -- procedureで使用
+ reference_report_id	integer,               -- 参照元レポートID（個人レポート用）
+ report_owner_flg		varchar(1),            -- レポートの所有者（共通：1　個人：2）
+ user_id				integer,               -- UserID（個人レポート用）
+ highlight_xml			text,                  -- 条件色付け設定XML
+ displayScreenType		varchar(1),            -- 表示タイプ（表、グラフ）
+ currentchart			varchar(50),           -- グラフ名前
+ colortype				varchar(1),            -- 色設定のType
+ report_type			varchar(1),            -------R or M or P（ここから追加）
+ screen_id				integer,               
+ screen_name			varchar(100),          
+ style_id				integer,               
+ style_name				varchar(100),          
+ model_seq				integer,               
+ screen_xml				text,                  ---画面用XML保存 Portalの時はここにXMLが入る。
+ screen_xsl				text,                  ---画面用XSL保存
+ screen_xsl2			text,                  ---画面用XSL保存
+ screen_xsl3			text,                  ---画面用XSL保存(使わない場合はNull)
+ screen_xsl4			text,                  ---画面用XSL保存(使わない場合はNull)
+ screen_xsl5			text,                  ---画面用XSL保存(使わない場合はNull)
+ screen_xsl6			text,                  ---画面用XSL保存(使わない場合はNull)
+ customized_flg			varchar(1),            ---0:していない（Default） 1:カスタマイズしている。
+ sql_xml				text,                  ---SQL用XML保存
+ sql_text				text,                  ---SQL分保存--カスタマイズした時のみ(していない時も)
+ drill_xml				text                   ---ドリルスルー用XML
+)
+/
+
+ALTER TABLE %schema%.oo_v_report ADD CONSTRAINT oo_v_report_pk UNIQUE (report_id)
+/
+
+INSERT INTO %schema%.oo_v_report
+(report_id,report_name,update_date,kind_flg,report_owner_flg,user_id) 
+values(1,'ROLAPレポート',now(),'F','1',0)
+/
+
+CREATE TABLE %schema%.oo_v_axis(
+       report_id                INTEGER NOT NULL,   -- レポートID
+       axis_id                  INTEGER NOT NULL,   -- 軸ID(値の範囲:1～16)、16はメジャー
+       dimension_seq            INTEGER NOT NULL,   -- dimension sequence(メジャーの場合は0固定)
+       name                     VARCHAR(100),        -- 名前
+       default_mem_key          INTEGER,            -- デフォルトメンバーのuniqueName
+       selecter_usedFLG         VARCHAR(1),         -- セレクタで絞込みが行われている軸か？
+       edge_type                VARCHAR(10),        -- 配置されたエッジ（COL/ROL/PAGE)
+       in_edge_index            INTEGER NOT NULL,   -- エッジ内での順序(0 start)
+       disp_mem_name_type       VARCHAR(100)         -- (DIMENSION) long_name/short_name
+)
+/
+
+ALTER TABLE %schema%.oo_v_axis ADD CONSTRAINT oo_v_axis_pk UNIQUE (report_id,axis_id)
+/
+
+
+CREATE TABLE %schema%.oo_v_axis_member(
+       report_id                INTEGER NOT NULL,   -- レポートID
+       axis_id                  INTEGER NOT NULL,   -- 軸ID
+       dimension_seq            INTEGER NOT NULL,   -- dimension sequence(メジャーの場合はmeasure_seqが入る)
+       member_key               INTEGER NOT NULL,   -- 軸メンバuniqueName(Dim:key、Measure:1startのIndex)
+       selectedFLG              VARCHAR(1),         -- セレクタで選択されているか
+       drilledFLG               VARCHAR(1),         -- ドリルされているか(メジャーの場合は常に「0」)
+       measure_member_type_id   INTEGER             -- (MEASURE) メジャータイプのID(ディメンションメンバーの場合はnull)
+)
+/
+
+ALTER TABLE %schema%.oo_v_axis_member ADD CONSTRAINT oo_v_axis_member_pk UNIQUE (report_id,axis_id,member_key)
+/
+
+
+
+CREATE TABLE %schema%.oo_v_color(
+       report_id                INTEGER NOT NULL,       -- レポートID
+       edge_id_combo            VARCHAR(512)  NOT NULL, -- 軸IDの組み合わせ(6個以内)文字列、軸ID順、カンマ区切り
+       edge_mem_key1            INTEGER NOT NULL,       -- 1番目の軸IDのメンバのuniqueName
+       edge_mem_key2            INTEGER,                -- 2番目の軸IDのメンバのuniqueName
+       edge_mem_key3            INTEGER,                -- 3番目の軸IDのメンバのuniqueName,
+       edge_mem_key4            INTEGER,                -- 4番目の軸IDのメンバのuniqueName
+       edge_mem_key5            INTEGER,                -- 5番目の軸IDのメンバのuniqueName
+       edge_mem_key6            INTEGER,                -- 6番目の軸IDのメンバのuniqueName
+       headerFLG                VARCHAR(1),             -- ヘッダーの色か、データ部の色か
+       html_color               VARCHAR(10)             -- HTML形式のカラー
+)
+/
+
+ALTER TABLE %schema%.oo_v_color ADD CONSTRAINT oo_v_edge_id_combo_pk UNIQUE (report_id,edge_id_combo,edge_mem_key1,edge_mem_key2,edge_mem_key3,edge_mem_key4,edge_mem_key5,edge_mem_key6)
+/
+
+
+CREATE TABLE %schema%.oo_v_measure_member_type(
+       measure_member_type_id   INTEGER NOT NULL,       -- メジャーメンバータイプID
+       name                     VARCHAR(100),           -- メジャーメンバータイプ名
+       comment                  VARCHAR(512),           -- コメント
+       group_name               VARCHAR(100),           -- メジャーメンバータイプのグループ名
+       image_url                VARCHAR(512),           -- メジャーメンバータイプを表す画像
+       xml_spreadsheet_format   VARCHAR(512),           -- XML_SpreadSheetのフォーマットを表わす文字列
+       function_name            VARCHAR(512),           -- 値取得時に適用するファンクション名
+       unit_function_id         INTEGER                 -- 単位のみを指定しての値取得時に適用するファンクションのID
+)
+/
+
+ALTER TABLE %schema%.oo_v_measure_member_type ADD CONSTRAINT oo_v_measure_member_type_pk UNIQUE (measure_member_type_id)
+/
+
+INSERT INTO %schema%.oo_v_measure_member_type values(1,'金額（一円）',null,'money','url(./images/money_1.gif)','&quot;\\&quot;#,##0;[Red]&quot;\\&quot;\\-#,##0','oo_m_money_1(%measure%)',7)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(2,'金額（千円）',null,'money','url(./images/money_1000.gif)','&quot;\\&quot;#,##0;[Red]&quot;\\&quot;\\-#,##0','oo_m_money_1000(%measure%)',8)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(3,'金額（百万円）',null,'money','url(./images/money_1000000.gif)','&quot;\\&quot;#,##0;[Red]&quot;\\&quot;\\-#,##0','oo_m_money_1000000(%measure%)',9)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(4,'カンマあり（一）',null,'camma','url(./images/camma_1.gif)','#,##0_ ;[Red]\\-#,##0\\ ','oo_m_camma_1(%measure%)',7)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(5,'カンマあり（千）',null,'camma','url(./images/camma_1000.gif)','#,##0_ ;[Red]\\-#,##0\\ ','oo_m_camma_1000(%measure%)',8)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(6,'カンマあり（百万）',null,'camma','url(./images/camma_1000000.gif)','#,##0_ ;[Red]\\-#,##0\\ ','oo_m_camma_1000000(%measure%)',9)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(7,'設定なし（一）',null,'no_format','url(./images/no_format_1.gif)','0_ ','oo_m_no_format_1(%measure%)',7)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(8,'設定なし（千）',null,'no_format','url(./images/no_format_1000.gif)','0_ ','oo_m_no_format_1000(%measure%)',8)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(9,'設定なし（百万）',null,'no_format','url(./images/no_format_1000000.gif)','0_ ','oo_m_no_format_1000000(%measure%)',9)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(10,'割合',null,'percent','url(./images/percent.gif)','Percent','oo_m_percent(%measure%)',11)
+/
+INSERT INTO %schema%.oo_v_measure_member_type values(11,'設定なし（桁調整なし）',null,'no_format','url(./images/no_format_no.gif)','0_ ','%measure%',11)
+/
+
+
+CREATE TABLE %schema%.oo_v_color_style (
+       id                   integer,
+       name                 varchar(10),
+       spreadstyle_file     varchar(50),
+       cellcolortable_file  varchar(50)
+)
+/
+
+ALTER TABLE %schema%.oo_v_color_style ADD CONSTRAINT oo_v_color_style_pk UNIQUE (id)
+/
+
+INSERT INTO %schema%.oo_v_color_style values(1, '標準','spreadStyle.css', 'cellColorTable.js')
+/
+INSERT INTO %schema%.oo_v_color_style values(2, 'ブルー', 'spreadStyle_blue.css', 'cellColorTable_blue.js')
+/
+INSERT INTO %schema%.oo_v_color_style values(3, 'グリーン', 'spreadStyle_green.css', 'cellColorTable_green.js')
+/
+INSERT INTO %schema%.oo_v_color_style values(4, 'オレンジ', 'spreadStyle_orange.css', 'cellColorTable_orange.js')
+/
+INSERT INTO %schema%.oo_v_color_style values(5, '紫', 'spreadStyle_purple.css', 'cellColorTable_purple.js')
+/
+INSERT INTO %schema%.oo_v_color_style values(6, 'グレー', 'spreadStyle_white.css', 'cellColorTable_white.js')
+/
+
+
+
+create table %schema%.oo_r_model(
+      model_seq    integer,
+      name         varchar(100),
+      schema       varchar(100),
+      model_flg    varchar(1),
+      model_xml    text,
+      last_update  timestamp,
+      dsn          varchar(512),
+      db_user      varchar(100),
+      db_user_pwd      varchar(100)
+)
+/
+
+ALTER TABLE %schema%.oo_r_model ADD CONSTRAINT oo_r_model_pk UNIQUE (model_seq)
+/
+
+
+
+
+CREATE INDEX oo_v_axis_member_key ON %schema%.oo_v_axis_member (report_id,axis_id)
+/
+
+
+CREATE SEQUENCE %schema%.user_id start 4
+/
+CREATE SEQUENCE %schema%.group_id start 2
+/
+CREATE SEQUENCE %schema%.report_id start 2
+/
+
+
+CREATE SEQUENCE %schema%.model_seq
+/
+
+
