@@ -105,13 +105,13 @@
 				<tr>
 					<td height="25" valign="middle"><img src="images/login/user.gif"></td>
 					<td valign="middle">
-						<input name="user" type="text" value="olap" style="border:1 solid #819CB9">
+						<input name="user" type="text" value="admin" style="border:1 solid #819CB9">
 					</td>
 				</tr>
 				<tr>
 					<td height="25" valign="middle"><img src="images/login/password.gif"></td>
 					<td valign="middle">
-						<input name="password"  type="password" value="olap" style="border:1 solid #819CB9">
+						<input name="password"  type="password" value="admin" style="border:1 solid #819CB9">
 					</td>
 				</tr>
 				<tr>
