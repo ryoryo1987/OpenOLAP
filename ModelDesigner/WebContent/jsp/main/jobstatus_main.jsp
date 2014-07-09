@@ -216,7 +216,7 @@
 								<table name="tbl_status" id="tbl_status" class="standard" style="width:475">
 									<tr>
 										<th class="standard">ジョブ</th>
-										<th class="standard>ステータス</th>
+										<th class="standard">ステータス</th>
 										<th class="standard">&nbsp;</th>
 									</tr>
 								</table>
